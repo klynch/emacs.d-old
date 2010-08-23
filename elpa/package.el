@@ -1171,6 +1171,8 @@ Letters do not insert themselves; instead, they are commands.
   (setq mode-name "Package Menu")
   (setq truncate-lines t)
   (setq buffer-read-only t)
+  (hl-line-mode t)
+  (set-face-background 'hl-line (frame-parameter nil 'cursor-color))
   ;; Support Emacs 21.
   (if (fboundp 'run-mode-hooks)
       (run-mode-hooks 'package-menu-mode-hook)
