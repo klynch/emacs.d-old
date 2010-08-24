@@ -1,6 +1,6 @@
 #!/bin/sh
-echo "Updating personal Emacs site-lisp"
-pushd ~/.emacs.d/site-lisp
+echo "Updating personal Emacs elisp"
+pushd ~/.emacs.d/elisp
 
 #Yasnippet
 wget http://yasnippet.googlecode.com/files/yasnippet-0.6.1c.tar.bz2

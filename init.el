@@ -31,8 +31,8 @@
         (normal-top-level-add-subdirs-to-load-path))))
 
 ;; Where all of our custom extensions and what not go
-(defvar site-lisp-dir (concat dotemacs-dir "site-lisp"))
-(add-subdirs-to-load-path site-lisp-dir)
+(defvar elisp-dir (concat dotemacs-dir "elisp"))
+(add-subdirs-to-load-path elisp-dir)
 
 (add-to-list 'load-path dotemacs-dir)
 

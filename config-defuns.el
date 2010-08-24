@@ -11,7 +11,7 @@
       (byte-compile-file "~/.emacs"))
   (if (file-newer-than-file-p "~/.emacs-private.el" "~/.emacs-private.elc")
       (byte-compile-file "~/.emacs-private.el"))
-  (byte-recompile-directory site-lisp-dir 0))
+  (byte-recompile-directory elisp-dir 0))
 
 (defun electric-pair ()
   "If at end of line, insert character pair without surrounding spaces.
