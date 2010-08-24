@@ -4,6 +4,9 @@
 
 (require 'cl)
 
+(defalias 'comment-region 'cr)
+(defalias 'eval-region 'er)
+
 (defun recompile-init ()
   "Byte-compile all your dotfiles again."
   (interactive)
