@@ -1,0 +1,1 @@
+/Users/kevin/local/rsense/etc/rsense.el
