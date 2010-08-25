@@ -4,8 +4,8 @@
 
 (require 'cl)
 
-(defalias 'comment-region 'cr)
-(defalias 'eval-region 'er)
+(defalias 'cr 'comment-region)
+(defalias 'er 'eval-region)
 
 (defun recompile-init ()
   "Byte-compile all your dotfiles again."
