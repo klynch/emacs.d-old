@@ -74,6 +74,7 @@
 (require 'config-lisp)
 (require 'config-ruby)
 (require 'config-python)
+(require 'config-org)
 (require 'config-auto-mode)
 
 (todochiku-message "Emacs"

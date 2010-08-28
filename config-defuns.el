@@ -4,14 +4,17 @@
 
 (require 'cl)
 
-;;TODO WHY DOES THIS NOT WORK???
-;;(defalias 'comment-region 'cr)
-;;(defalias 'eval-region 'er)
-;;(defalias 'eval-buffer 'eb)
+(defun reinit ()
+  "Re initializes emacs configuration files."
+  (interactive)
+  (load-file (concat dotemacs-dir "init.el")))
 
 (defun compile-file (file)
   (if (file-newer-than-file-p file (concat file "c"))
       (byte-compile-file file)))
+
+;;(defun clean-emacs-d ()
+;;  (
 
 ;;TODO get rid of compile-file. Should look in ~/.emacs.d
 (defun compile-emacs-d ()
@@ -83,5 +86,42 @@
           (rename-buffer new-name)
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
+
+
+;;;TODO
+;; (defun copy-to-register-1 (p1 p2)
+;;   "Copy text selection to register named “1”."
+;;   (interactive "r")
+;;   (copy-to-register ?1 p1 p2 )
+;;   )
+
+;; (defun insert-register-content-1 ()
+;;   "Insert register named “1”'s content."
+;;   (interactive)
+;;   (insert-register ?1)
+;;   )
+
+;; (global-set-key (kbd "<f7>") 'copy-to-register-1)
+;; (global-set-key (kbd "<f8>") 'insert-register-content-1)
+
+
+;;; ALIASES
+(defalias 'gf 'grep-find)
+(defalias 'fd 'find-dired)
+(defalias 'sh 'shell)
+
+(defalias 'qrr 'query-replace-regexp)
+(defalias 'lml 'list-matching-lines)
+(defalias 'dml 'delete-matching-lines)
+(defalias 'rof 'recentf-open-files)
+
+(defalias 'eb 'eval-buffer)
+(defalias 'er 'eval-region)
+(defalias 'ee 'eval-expression)
+
+(defalias 'cr 'comment-region)
+(defalias 'ur 'comment-region)
+
+
 
 (provide 'config-defuns)
