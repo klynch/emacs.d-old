@@ -1,0 +1,6 @@
+[submodule "muse"]
+	path = muse
+	url = git://repo.or.cz/muse-el.git
+[submodule "elisp/muse-blog"]
+	path = elisp/muse-blog
+	url = git://git.naquadah.org/muse-blog.git
