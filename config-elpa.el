@@ -11,7 +11,9 @@
                               'yaml-mode
                               'find-file-in-project
                               'magit
-                              'gist)
+                              'gist
+                              'muse
+                              )
   "Libraries that should be installed by default.")
 
 (defun config-elpa-install ()
