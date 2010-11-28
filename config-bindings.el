@@ -1,6 +1,9 @@
 ;;; config-bindings.el --- Configures input.
 ;; Sets up key bindings in a minor mode
 
+;;TODO Map C-x C-m to "rename-file-and-buffer"
+;;TODO Correctly map C-c d to open debugger
+
 (require 'cl)
 
 (set-terminal-coding-system 'utf-8)
@@ -50,10 +53,11 @@
 (define-key k-minor-mode-map [f5]            'toggle-truncate-lines)
 (define-key k-minor-mode-map [f6]            'nuke-trailing-whitespace)
 (define-key k-minor-mode-map [f7]            'indent-page)
+(define-key k-minor-mode-map [f8]            'magit-status)
 
 ;; cycle through buffers
 (define-key k-minor-mode-map [C-tab]         'bs-cycle-next)
-(define-key k-minor-mode-map [S-tab]         'bs-cycle-previous)
+(define-key k-minor-mode-map [C-S-tab]       'bs-cycle-previous)
 
 ;; window stuff
 (define-key k-minor-mode-map [C-kp-enter]    'other-window)
@@ -70,6 +74,15 @@
 (define-key k-minor-mode-map (kbd "\C-c c")  'compile)
 (define-key k-minor-mode-map (kbd "\C-c g")  'goto-line)
 (define-key k-minor-mode-map (kbd "\C-c q")  'comment-or-uncomment-region)
+
+(defun debug-key (map dbg) (define-key map (kbd "\C-c d")  dbg))
+(add-hook 'c-mode-hook (lambda () (debug-key c-mode-map 'gdb)))
+(add-hook 'c++-mode-hook (lambda () (debug-key c++-mode-map 'gdb)))
+(add-hook 'objc-mode-hook (lambda () (debug-key objc-mode-map 'gdb)))
+(add-hook 'java-mode-hook (lambda () (debug-key java-mode-map 'jdb)))
+(add-hook 'python-mode-hook (lambda () (debug-key py-mode-map 'pdb)))
+(add-hook 'perl-mode-hook (lambda () (debug-key perl-mode-map 'perldb)))
+;;(add-hook 'ruby-mode-hook (lambda () (debug-key ruby-mode-map 'rubydb)))
 
 (define-key k-minor-mode-map (kbd "\C-x t")  'toggle-truncate-lines)
 (define-key k-minor-mode-map (kbd "\C-x r")  'toggle-read-only)

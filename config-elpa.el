@@ -10,7 +10,7 @@
                               'css-mode
                               'yaml-mode
                               'find-file-in-project
-                              'magit
+                              ;; 'magit
                               'gist
                               'muse
                               )

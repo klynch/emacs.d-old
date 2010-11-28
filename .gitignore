@@ -1,7 +1,8 @@
 *.elc
-*~
 images
 private.el
 elpa/archive-contents
 elpa/builtin-packages
 tramp
+*~
+\#*\#
