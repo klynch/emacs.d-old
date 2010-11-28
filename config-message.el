@@ -5,13 +5,9 @@
 (autoload 'todochiku-icon "todochiku")
 (autoload 'todochiku-in "todochiku" nil t)
 
-;;TODO try setvar... see if its overrided?
-;; (custom-set-variables
-;;  '(todochiku-icons-directory (concat dotemacs-dir "todochiku-icons"))
-;;  '(todochiku-message-too t)
-;; )
-
 (defvar todochiku-icons-directory (concat dotemacs-dir "todochiku-icons"))
 (defvar todochiku-message-too t)
+
+;;TODO make message alias functions like (msg ...)
 
 (provide 'config-message)

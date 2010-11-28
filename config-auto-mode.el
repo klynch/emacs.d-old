@@ -31,6 +31,14 @@
 (add-to-list 'auto-mode-alist '("\\.org$"      . org-mode))
 (add-to-list 'auto-mode-alist '("\\.org.txt$"  . org-mode))
 
-(add-to-list 'auto-mode-alist '("/.?zsh.d/" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("/.?zsh.d/"    . shell-script-mode))
+
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text$"     . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.mdwn$"     . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md$"       . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.mdt$"      . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 
 (provide 'config-auto-mode)
