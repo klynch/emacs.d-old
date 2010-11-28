@@ -4,16 +4,45 @@
 
 (require 'cl)
 
-(defalias 'cr 'comment-region)
-(defalias 'er 'eval-region)
+(defun reinit ()
+  "Re initializes emacs configuration files."
+  (interactive)
+  (load-file (concat dotemacs-dir "init.el")))
 
-(defun recompile-init ()
+(defun compile-file (file)
+  (if (file-newer-than-file-p file (concat file "c"))
+      (byte-compile-file file)))
+
+;;(defun clean-emacs-d ()
+;;  (
+
+;;TODO get rid of compile-file. Should look in ~/.emacs.d
+(defun compile-emacs-d ()
   "Byte-compile all your dotfiles again."
   (interactive)
-  (if (file-newer-than-file-p "~/.emacs" "~/.emacs.elc")
-      (byte-compile-file "~/.emacs"))
-  (if (file-newer-than-file-p "~/.emacs-private.el" "~/.emacs-private.elc")
-      (byte-compile-file "~/.emacs-private.el"))
+  (compile-file "~/.emacs.d/init.el")
+  (compile-file "~/.emacs.d/private.el")
+  (compile-file "~/.emacs.d/config-auto-mode.el")
+  (compile-file "~/.emacs.d/config-bindings.el")
+  (compile-file "~/.emacs.d/config-cedet.el")
+  (compile-file "~/.emacs.d/config-c.el")
+  (compile-file "~/.emacs.d/config-compile.el")
+  (compile-file "~/.emacs.d/config-complete.el")
+  (compile-file "~/.emacs.d/config-defuns.el")
+  (compile-file "~/.emacs.d/config-diff.el")
+  (compile-file "~/.emacs.d/config-elpa.el")
+  (compile-file "~/.emacs.d/config-latex.el")
+  (compile-file "~/.emacs.d/config-lisp.el")
+  (compile-file "~/.emacs.d/config-matlab.el")
+  (compile-file "~/.emacs.d/config-message.el")
+  (compile-file "~/.emacs.d/config-misc.el")
+  (compile-file "~/.emacs.d/config-muse.el")
+  (compile-file "~/.emacs.d/config-python.el")
+  (compile-file "~/.emacs.d/config-registers.el")
+  (compile-file "~/.emacs.d/config-ruby.el")
+  (compile-file "~/.emacs.d/config-shell.el")
+  (compile-file "~/.emacs.d/config-text.el")
+  (compile-file "~/.emacs.d/config-twit.el")
   (byte-recompile-directory elisp-dir 0))
 
 (defun electric-pair ()
@@ -57,5 +86,42 @@
           (rename-buffer new-name)
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
+
+
+;;;TODO
+;; (defun copy-to-register-1 (p1 p2)
+;;   "Copy text selection to register named “1”."
+;;   (interactive "r")
+;;   (copy-to-register ?1 p1 p2 )
+;;   )
+
+;; (defun insert-register-content-1 ()
+;;   "Insert register named “1”'s content."
+;;   (interactive)
+;;   (insert-register ?1)
+;;   )
+
+;; (global-set-key (kbd "<f7>") 'copy-to-register-1)
+;; (global-set-key (kbd "<f8>") 'insert-register-content-1)
+
+
+;;; ALIASES
+(defalias 'gf 'grep-find)
+(defalias 'fd 'find-dired)
+(defalias 'sh 'shell)
+
+(defalias 'qrr 'query-replace-regexp)
+(defalias 'lml 'list-matching-lines)
+(defalias 'dml 'delete-matching-lines)
+(defalias 'rof 'recentf-open-files)
+
+(defalias 'eb 'eval-buffer)
+(defalias 'er 'eval-region)
+(defalias 'ee 'eval-expression)
+
+(defalias 'cr 'comment-region)
+(defalias 'ur 'comment-region)
+
+
 
 (provide 'config-defuns)

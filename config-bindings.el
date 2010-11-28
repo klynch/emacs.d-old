@@ -90,6 +90,7 @@
 
 (define-key k-minor-mode-map (kbd "\C-c l")  'org-store-link)
 (define-key k-minor-mode-map (kbd "\C-c a")  'org-agenda)
+(define-key k-minor-mode-map (kbd "\C-c b")  'org-iswitchb)
 
 ;; Mouse button 1 drags the scroll bar
 (define-key k-minor-mode-map [vertical-scroll-bar down-mouse-1] 'scroll-bar-drag)
