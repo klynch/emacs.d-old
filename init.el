@@ -36,7 +36,8 @@
 
 (add-to-list 'load-path dotemacs-dir)
 
-(if (fboundp 'image-load-path) nil (setq image-load-path '()))
+;;We should add our custom image path to the front.
+;;This guarantees that we have a modifiable directory
 (add-to-list 'image-load-path (concat dotemacs-dir "images/"))
 
 (require 'color-theme)
@@ -64,7 +65,7 @@
 (require 'config-misc)
 (require 'config-cedet)
 (require 'config-complete)
-;;(require 'config-muse)
+(require 'config-muse)
 (require 'config-compile)
 (require 'config-diff)
 (require 'config-text)

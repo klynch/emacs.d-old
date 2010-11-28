@@ -12,6 +12,7 @@
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":")
 
+(setq tramp-default-method "ssh")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Display
@@ -76,7 +77,23 @@
 ;; Stop that annoying beep
 (setq visible-bell 'top-bottom)
 
+;;Do not ask for "confirm" when creating new buffer
+(setq confirm-nonexistent-file-or-buffer nil)
+
+;;http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(setq ido-create-new-buffer 'always)
+(ido-mode 1)
+
+;;(setq ido-use-filename-at-point 'guess)
+;;ido-use-url-at-point
+;;completion-ignored-extensions
+
 (setq default-tab-width 2)
 (setq tab-width 2)
+
+(remove-hook 'kill-buffer-query-functions 'process-kill-buffer-query-function)
+
 
 (provide 'config-misc)
