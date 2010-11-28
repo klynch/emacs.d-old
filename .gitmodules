@@ -1,3 +1,6 @@
 [submodule "elisp/magit"]
 	path = elisp/magit
 	url = git://github.com/philjackson/magit.git
+[submodule "elisp/muse-blog"]
+	path = elisp/muse-blog
+	url = git://git.naquadah.org/muse-blog.git
