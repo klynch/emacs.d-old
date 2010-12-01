@@ -1,4 +1,4 @@
-(require 'cl)
+(eval-when-compile (require 'cl))
 (defvar *emacs-load-start* (current-time))
 
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -54,11 +54,11 @@
 (package-initialize)
 (require 'config-elpa)
 
-(require 'config-elpa)
-;;(require 'config-registers)
+(autoload 'magit-status "magit" nil t)
+
+(require 'config-registers)
 (require 'config-message)
 ;;(require 'config-twit)
-;;(autoload 'magit-status "magit" nil t)
 (require 'config-defuns)
 (require 'config-shell)
 (require 'config-bindings)

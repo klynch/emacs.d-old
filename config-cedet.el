@@ -4,14 +4,20 @@
 ;;; CEDET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'load-path (concat dotemacs-dir "cedet/common"))
-;;(require 'cedet)
+;; Load CEDET
+(add-to-list 'load-path (concat dotemacs-dir "elisp/cedet/common"))
+(require 'cedet)
 
-(add-to-list 'load-path (concat dotemacs-dir "ecb"))
+;;(add-to-list 'load-path (concat dotemacs-dir "elisp/cedet/ecb"))
 ;;(load-file "~/.emacs.d/ecb/ecb.el")
 ;;(require 'ecb)
 
 ;;(require 'ecb-autoloads)
+
+(defun my-semantic-hook ()
+  (imenu-add-to-menubar "TAGS"))
+(add-hook 'semantic-init-hooks 'my-semantic-hook)
+
 
 
 (setq speedbar-mode-hook '(lambda ()

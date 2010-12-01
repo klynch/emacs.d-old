@@ -1,5 +1,7 @@
 (require 'cl)
 
+(add-to-list 'load-path (concat dotemacs-dir "elisp/org-mode/lisp"))
+
 (require 'org-install)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
