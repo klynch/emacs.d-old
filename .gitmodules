@@ -10,3 +10,6 @@
 [submodule "elisp/org-mode"]
 	path = elisp/org-mode
 	url = git://repo.or.cz/org-mode.git
+[submodule "elisp/muse"]
+	path = elisp/muse
+	url = git://repo.or.cz/muse-el.git
