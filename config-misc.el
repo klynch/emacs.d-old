@@ -6,13 +6,8 @@
     (setq
      ns-pop-up-frames nil))
 
-;; We want to uniquify names instead of foo<1> foo<2>
-(require 'uniquify)
-(setq
- uniquify-buffer-name-style 'post-forward
- uniquify-separator ":")
-
-(setq tramp-default-method "ssh")
+(setq default-tab-width 2)
+(setq tab-width 2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Display
@@ -39,6 +34,7 @@
 ;; Do not fold lines
 (set-default 'truncate-lines t)
 (set-default 'case-fold-search t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Behaviour
@@ -77,23 +73,72 @@
 ;; Stop that annoying beep
 (setq visible-bell 'top-bottom)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Buffers
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;Use TRAMP to open buffers over SSH
+(setq tramp-default-method "ssh")
+
+;;We want to uniquify names instead of foo<1> foo<2>
+(require 'uniquify)
+(setq
+ uniquify-buffer-name-style 'post-forward
+ uniquify-separator ":")
+
+;;Do not ask before killing a buffer that has a running process
+(remove-hook 'kill-buffer-query-functions 'process-kill-buffer-query-function)
+
 ;;Do not ask for "confirm" when creating new buffer
 (setq confirm-nonexistent-file-or-buffer nil)
 
-;;http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Interactively Do Things
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;Sources:
+;;  http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
+;;  http://www.emacswiki.org/emacs/InteractivelyDoThings
+
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (setq ido-create-new-buffer 'always)
-(ido-mode 1)
-
 ;;(setq ido-use-filename-at-point 'guess)
+
+;;Amount of time to wait until auto-searching for a file
+(setq ido-auto-merge-delay-time 3)
+
+
+
 ;;ido-use-url-at-point
 ;;completion-ignored-extensions
 
-(setq default-tab-width 2)
-(setq tab-width 2)
+;; ;;Display ido results vertically, rather than horizontally
+;; (setq ido-decorationsq (quote ("\n-> "  ""   "\n "  "\n ..."  "["  "]"  "[No match]"   " [Matched]"  " [Not readable]"  " [Too big]"  "[Confirm]")))
+;; (defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
+;; (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
 
-(remove-hook 'kill-buffer-query-functions 'process-kill-buffer-query-function)
+;; ;; sort ido filelist by mtime instead of alphabetically
+;; (add-hook 'ido-make-file-list-hook 'ido-sort-mtime)
+;; (add-hook 'ido-make-dir-list-hook 'ido-sort-mtime)
+;; (defun ido-sort-mtime ()
+;;   (setq ido-temp-list
+;;         (sort ido-temp-list
+;;               (lambda (a b)
+;;                 (let ((ta (nth 5 (file-attributes (concat ido-current-directory a))))
+;;                       (tb (nth 5 (file-attributes (concat ido-current-directory b)))))
+;;                   (if (= (nth 0 ta) (nth 0 tb))
+;;                       (> (nth 1 ta) (nth 1 tb))
+;;                     (> (nth 0 ta) (nth 0 tb)))))))
+;;   (ido-to-end  ;; move . files to end (again)
+;;    (delq nil (mapcar
+;;               ;;(lambda (x) (if (string-equal (substring x 0 1) ".") x))
+;;               (lambda (x) (if (and (not (string-equal x ".")) (string-equal (substring x 0 1) ".")) x)) ;; We don't want to bury '.'
+;;               ido-temp-list))))
+
+(ido-mode 1)
 
 
 (provide 'config-misc)
