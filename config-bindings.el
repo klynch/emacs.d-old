@@ -74,6 +74,7 @@
 (define-key k-minor-mode-map (kbd "\C-c c")  'compile)
 (define-key k-minor-mode-map (kbd "\C-c g")  'goto-line)
 (define-key k-minor-mode-map (kbd "\C-c q")  'comment-or-uncomment-region)
+(define-key k-minor-mode-map (kbd "\C-c /")  'comment-or-uncomment-region)
 
 (defun debug-key (map dbg) (define-key map (kbd "\C-c d")  dbg))
 (add-hook 'c-mode-hook (lambda () (debug-key c-mode-map 'gdb)))
