@@ -1,5 +1,7 @@
 (require 'cl)
 
+(setq eshell-directory-name (expand-file-name-dotemacs "eshell/"))
+
 (defvar term-cmd (getenv "SHELL"))
 (autoload 'term-check-proc "term")
 (defun visit-ansi-term ()

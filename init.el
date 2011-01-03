@@ -13,14 +13,10 @@
 ;; In case we ever need to change the emacs directory location
 (defvar dotemacs-dir "~/.emacs.d/")
 
-;; We don't want the custom file cluttering our beautiful .emacs file
-(setq custom-file (concat dotemacs-dir "custom.el"))
-
-(setq autoload-file (concat dotemacs-dir "loaddefs.el"))
-(load autoload-file 'noerror)
-
-;; Let's not share our private stuff
-(load (concat dotemacs-dir "private.el") 'noerror)
+(defun expand-file-name-dotemacs (name)
+  "Converts NAME to absolute, and canonicalize it. If NAME is not
+absolute, then it expands to the file NAME inside `dotemacs-dir`."
+  (expand-file-name name dotemacs-dir))
 
 (defun add-subdirs-to-load-path (dir)
   "Adds the subdirectories to the list if possible."
@@ -30,15 +26,24 @@
         (add-to-list 'load-path my-lisp-dir)
         (normal-top-level-add-subdirs-to-load-path))))
 
+;; We don't want the custom file cluttering our beautiful .emacs file
+(setq custom-file (expand-file-name-dotemacs "custom.el"))
+(setq autoload-file (expand-file-name-dotemacs "loaddefs.el"))
+(load autoload-file 'noerror)
+
+;; Let's not share our private stuff
+(defvar private-file (expand-file-name-dotemacs "private.el"))
+(load private-file 'noerror)
+
 ;; Where all of our custom extensions and what not go
-(defvar elisp-dir (concat dotemacs-dir "elisp"))
+(defvar elisp-dir (expand-file-name-dotemacs "elisp"))
 (add-subdirs-to-load-path elisp-dir)
 
 (add-to-list 'load-path dotemacs-dir)
 
 ;;We should add our custom image path to the front.
 ;;This guarantees that we have a modifiable directory
-(add-to-list 'image-load-path (concat dotemacs-dir "images/"))
+(add-to-list 'image-load-path (expand-file-name-dotemacs "images/"))
 
 (require 'color-theme)
 (color-theme-tty-dark)
@@ -48,13 +53,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Load up ELPA, the package manager
-(add-to-list 'load-path (concat dotemacs-dir "elpa"))
-
+(add-to-list 'load-path (expand-file-name-dotemacs "elpa"))
 (require 'package)
 (package-initialize)
 (require 'config-elpa)
 
 (autoload 'magit-status "magit" nil t)
+
+;; Use our own CEDET
+(add-to-list 'load-path (expand-file-name-dotemacs "cedet/common"))
+;;(require 'config-cedet)
 
 (require 'config-registers)
 (require 'config-message)
@@ -63,7 +71,6 @@
 (require 'config-shell)
 (require 'config-bindings)
 (require 'config-misc)
-(require 'config-cedet)
 (require 'config-complete)
 (require 'config-muse)
 (require 'config-compile)
