@@ -4,7 +4,7 @@
 ;;TODO Map C-x C-m to "rename-file-and-buffer"
 ;;TODO Correctly map C-c d to open debugger
 
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -47,8 +47,10 @@
 (define-key k-minor-mode-map (kbd "\C-v")	   'pager-page-down)
 
 (define-key k-minor-mode-map [f1]            'man-follow)
-(define-key k-minor-mode-map [f2]            'visit-ansi-term)
-(define-key k-minor-mode-map [f3]            nil)
+(define-key k-minor-mode-map [f2]            'eshell)
+(define-key k-minor-mode-map [C-f2]          'visit-ansi-term)
+(define-key k-minor-mode-map [M-f2]          'python-shell)
+(define-key k-minor-mode-map [f3]            'speedbar)
 (define-key k-minor-mode-map [f4]            nil)
 (define-key k-minor-mode-map [f5]            'toggle-truncate-lines)
 (define-key k-minor-mode-map [f6]            'nuke-trailing-whitespace)
