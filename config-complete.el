@@ -1,45 +1,6 @@
 (require 'cl)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Company Mode
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(eval-when-compile (require 'company))
-
-(autoload 'company-mode "company" nil t)
-(setq company-backends nil)
-(defun complete-or-indent ()
-  (interactive)
-  (if (company-manual-begin)
-      (company-complete-common)
-    (indent-according-to-mode)))
-
-(defun indent-or-complete ()
-  (interactive)
-  (if (looking-at "\\_>")
-      (company-complete-common)
-    (indent-according-to-mode)))
-
-(define-key k-minor-mode-map (kbd "\t")  'indent-or-complete)
-(define-key k-minor-mode-map (kbd "\M-/")  'company-complete-common)
-
-(defun add-company-backend (hook backends)
-  "Adds a list of backends to the backendlist for a mode"
-  (interactive)
-  (add-hook 'hook (lambda ()
-                    (set (make-local-variable 'company-backends) 'backend))))
-
-(add-hook 'emacs-lisp-mode-hook (lambda () (set (make-local-variable 'company-backends) '(company-elisp))))
-;;(add-company-backend 'emacs-lisp-mode-hook '(company-elisp))
-
-(add-hook 'python-mode-hook (lambda () (set (make-local-variable 'company-backends) '(company-ropemacs company-pysmell))))
-;;(add-company-backend 'python-mode-hook '(company-ropemacs company-pysmell))
-
-;;TODO finish hooks
-;;TODO automatically start
-;;TODO bind TAB to YaSnippet -> Company Mode -> Indent
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; YaSnippet
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar snippets-dir (concat dotemacs-dir "snippets"))
@@ -50,28 +11,27 @@
 
 ;;(add-to-list 'auto-mode-alist '(snippets-dir . snippet-mode))
 
-;;(remove-hook 'write-file-functions 'nuke-trailing-whitespace t)
-
-;; Enable versioning with default values (keep five last versions, I think!)
-;;(setq version-control t)
-;; Save all backup file in this directory.
-;;(setq backup-directory-alist (quote ((".*" . "~/.emacs_backups/"))))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-Complete Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (require 'auto-complete-config)
-;;(require 'auto-complete)
-;; (global-auto-complete-mode t)
+(when (require 'auto-complete-config nil 'noerror) ;; don't break if not installed
+  (add-to-list 'ac-dictionary-directories (concat dotemacs-dir "elisp/auto-complete/dict"))
+  (setq ac-comphist-file  "~/.emacs.d/ac-comphist.dat")
+  (ac-config-default))
+(require 'auto-complete-config)
 
-;; (setq ac-auto-start nil)
-;; (global-set-key "\M-/" 'ac-start)
-;; (define-key ac-complete-mode-map "\M-/" 'ac-stop)
-;; ;;(define-key ac-complete-mode-map "\C-n" 'ac-next)
-;; ;;(define-key ac-complete-mode-map "\C-p" 'ac-previous)
-;; (define-key ac-complete-mode-map "\t" 'ac-complete)
-;; ;;(define-key ac-complete-mode-map "\r" nil)
+;; (add-hook 'c++-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-semantic)))
+
+;;(ac-set-trigger-key "TAB")
+;;(setq ac-auto-start nil)
+;;(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+
+;; Complete member name by C-c . for C++ mode.
+;; (add-hook 'c++-mode-hook
+;;           (lambda ()
+;;             (local-set-key (kbd "C-c .") 'ac-complete-semantic)))
+
 ;; (setq ac-dwim t)
 
 (provide 'config-complete)
