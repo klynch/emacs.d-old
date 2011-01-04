@@ -1,9 +1,9 @@
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; YaSnippet
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar snippets-dir (concat dotemacs-dir "snippets"))
+(defvar snippets-dir (expand-file-name-dotemacs "snippets"))
 
 (require 'yasnippet)
 (yas/initialize)

@@ -2,7 +2,7 @@
 ;;
 ;; Part of the Emacs Starter Kit
 
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 (defvar config-packages (list 'idle-highlight
                               'ruby-mode

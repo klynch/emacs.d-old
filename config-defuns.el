@@ -2,19 +2,11 @@
 ;;; Additional functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'cl)
-
-(defun reinit ()
-  "Re initializes emacs configuration files."
-  (interactive)
-  (load-file (concat dotemacs-dir "init.el")))
+(eval-when-compile (require 'cl))
 
 (defun compile-file (file)
   (if (file-newer-than-file-p file (concat file "c"))
       (byte-compile-file file)))
-
-;;(defun clean-emacs-d ()
-;;  (
 
 ;;TODO get rid of compile-file. Should look in ~/.emacs.d
 (defun compile-emacs-d ()

@@ -2,7 +2,7 @@
 ;;; Additional modes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 (add-to-list 'auto-mode-alist '("Makefile$"    . makefile-mode))
 
