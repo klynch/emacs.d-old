@@ -1,4 +1,4 @@
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 ;; GROWL or its alternatives. must set directory first
 (autoload 'todochiku-message "todochiku")

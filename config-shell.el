@@ -1,4 +1,4 @@
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 (setq eshell-directory-name (expand-file-name-dotemacs "eshell/"))
 

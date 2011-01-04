@@ -2,7 +2,7 @@
 ;;; MATLAB Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 (require 'matlab)
 ;; (add-to-list 'auto-mode-alist '("\\.m$" . matlab-mode))

@@ -2,7 +2,7 @@
 ;;; Ruby Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 (add-to-list 'auto-mode-alist '("\\.rake$"     . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$"    . ruby-mode))

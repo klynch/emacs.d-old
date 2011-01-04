@@ -1,4 +1,4 @@
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 (autoload 'twit-show-recent-tweets              "twit" nil t)
 (autoload 'twit-show-at-tweets                  "twit" nil t)

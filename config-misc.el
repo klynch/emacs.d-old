@@ -1,6 +1,6 @@
 ;;; config-misc.el --- Tweaks Emacs behavioural configuration flags
 
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 (if (eq system-type 'darwin)
     (setq
