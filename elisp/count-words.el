@@ -1,4 +1,4 @@
-;; Count the words in the highlighted text region
+;;;###autoload
 (defun count-words-region (beginning end)
   "Print number of words in the region."
   (interactive "r")
@@ -22,7 +22,7 @@
             (t
              (message "The region has %d words." count))))))
 
-;; Count the words in the page.
+;;;###autoload
 (defun count-words-page ()
   "Print number of words in the page."
   (interactive)
