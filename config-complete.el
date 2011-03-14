@@ -15,9 +15,13 @@
 ;;; Auto-Complete Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(when (require 'auto-complete-config nil 'noerror) ;; don't break if not installed
-  (add-to-list 'ac-dictionary-directories (concat dotemacs-dir "elisp/auto-complete/dict"))
-  (setq ac-comphist-file  "~/.emacs.d/ac-comphist.dat")
+;;don't break if not installed
+(when (require 'auto-complete-config nil 'noerror)
+
+  (add-to-list 'ac-dictionary-directories
+               (expand-file-name-dotemacs "elisp/auto-complete/dict"))
+  (setq ac-comphist-file
+        (expand-file-name-dotemacs "ac-comphist.dat"))
   (ac-config-default))
 (require 'auto-complete-config)
 
