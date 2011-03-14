@@ -1,6 +1,6 @@
 (eval-when-compile (require 'cl))
 
-(add-to-list 'load-path (concat dotemacs-dir "elisp/org-mode/lisp"))
+(add-to-list 'load-path (expand-file-name-dotemacs "elisp/org-mode/lisp"))
 
 (require 'org-install)
 
