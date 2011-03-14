@@ -71,6 +71,11 @@
 (autoload 'nuke-trailing-whitespace "whitespace" nil t)
 (add-hook 'write-file-functions 'nuke-trailing-whitespace)
 
+;;Make file executable according to umask if not already executable. If file
+;;already has any execute bits set at all, do not change existing file modes.
+(add-hook 'after-save-hook
+          'executable-make-buffer-file-executable-if-script-p)
+
 (defun rename-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
   (interactive "sNew name: ")
@@ -121,6 +126,10 @@
 (defalias 'cr 'comment-region)
 (defalias 'ur 'comment-region)
 
+(defalias 'open 'find-file)
+(defalias 'openo 'find-file-other-window)
+(defalias 'o 'open)
+(defalias 'oo 'openo)
 
 
 (provide 'config-defuns)
