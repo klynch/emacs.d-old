@@ -7,11 +7,11 @@
 ;;; Electric Pairs
 (add-hook 'python-mode-hook
           (lambda ()
-            (define-key python-mode-map "\"" 'electric-pair)
-            (define-key python-mode-map "\'" 'electric-pair)
-            (define-key python-mode-map "(" 'electric-pair)
-            (define-key python-mode-map "[" 'electric-pair)
-            (define-key python-mode-map "{" 'electric-pair)
+            ;; (define-key python-mode-map "\"" 'electric-pair)
+            ;; (define-key python-mode-map "\'" 'electric-pair)
+            ;; (define-key python-mode-map "(" 'electric-pair)
+            ;; (define-key python-mode-map "[" 'electric-pair)
+            ;; (define-key python-mode-map "{" 'electric-pair)
             (define-key python-mode-map "\C-m" 'newline-and-indent)
             (setq indent-tabs-mode nil)
             (setq tab-width 4)))
