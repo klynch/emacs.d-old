@@ -10,13 +10,13 @@
 ;;; Emacs Loading
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; In case we ever need to change the emacs directory location
-(defvar dotemacs-dir "~/.emacs.d/")
-
 (defun expand-file-name-dotemacs (name)
   "Converts NAME to absolute, and canonicalize it. If NAME is not
-absolute, then it expands to the file NAME inside `dotemacs-dir`."
-  (expand-file-name name dotemacs-dir))
+absolute, then it expands to the file NAME inside `user-emacs-directory`."
+  (expand-file-name name user-emacs-directory))
+
+(defvar conf-enabled (expand-file-name-dotemacs "conf-enabled"))
+(defvar conf-available (expand-file-name-dotemacs "conf-available"))
 
 (defun add-subdirs-to-load-path (dir)
   "Adds the subdirectories to the list if possible."
@@ -26,10 +26,14 @@ absolute, then it expands to the file NAME inside `dotemacs-dir`."
         (add-to-list 'load-path my-lisp-dir)
         (normal-top-level-add-subdirs-to-load-path))))
 
+(add-to-list 'load-path user-emacs-directory)
+
 ;; We don't want the custom file cluttering our beautiful .emacs file
 (setq custom-file (expand-file-name-dotemacs "custom.el"))
-(setq autoload-file (expand-file-name-dotemacs "loaddefs.el"))
-(load autoload-file 'noerror)
+
+;; Specify our own file to prevent emacs from using a system one
+(setq generated-autoload-file (expand-file-name-dotemacs "loaddefs.el"))
+(load generated-autoload-file 'noerror)
 
 ;; Let's not share our private stuff
 (defvar private-file (expand-file-name-dotemacs "private.el"))
@@ -38,8 +42,6 @@ absolute, then it expands to the file NAME inside `dotemacs-dir`."
 ;; Where all of our custom extensions and what not go
 (defvar elisp-dir (expand-file-name-dotemacs "elisp"))
 (add-subdirs-to-load-path elisp-dir)
-
-(add-to-list 'load-path dotemacs-dir)
 
 ;;We should add our custom image path to the front.
 ;;This guarantees that we have a modifiable directory
@@ -61,9 +63,25 @@ absolute, then it expands to the file NAME inside `dotemacs-dir`."
 (autoload 'magit-status "magit" nil t)
 
 ;; Use our own CEDET
-(add-to-list 'load-path (expand-file-name-dotemacs "cedet/common"))
+;;(add-to-list 'load-path (expand-file-name-dotemacs "cedet/common"))
 ;;(require 'config-cedet)
 
+;;TODO umask!
+
+(defun load-conf-file (file)
+  "Loads the config file located in conf-enabled directory"
+  (require (intern (file-name-sans-extension file))
+           (concat conf-enabled "/" file)))
+
+(defun load-conf-enabled ()
+ "Loads all of the configuration files linked in
+~/.emacs.d/conf-enabled from ~/.emacs.d/conf-available"
+ (make-directory conf-enabled t)
+ (make-directory conf-available t)
+ (mapcar 'load-conf-file
+         (delete ".." (delete "." (directory-files conf-enabled)))))
+
+(require 'config-blog)
 (require 'config-registers)
 (require 'config-message)
 ;;(require 'config-twit)
@@ -72,7 +90,7 @@ absolute, then it expands to the file NAME inside `dotemacs-dir`."
 (require 'config-bindings)
 (require 'config-misc)
 (require 'config-complete)
-(require 'config-muse)
+;;(require 'config-muse)
 (require 'config-compile)
 (require 'config-diff)
 (require 'config-text)
@@ -92,3 +110,4 @@ absolute, then it expands to the file NAME inside `dotemacs-dir`."
                                 (+ (first *emacs-load-start*)
                                    (second *emacs-load-start*)))))
                    (todochiku-icon 'check))
+(put 'upcase-region 'disabled nil)
