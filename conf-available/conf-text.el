@@ -14,4 +14,4 @@
 ;; Allow tabs in text-mode
 (add-hook 'text-mode-hook '(lambda () (setq indent-tabs-mode t)))
 
-(provide 'config-text)
+(provide 'conf-text)

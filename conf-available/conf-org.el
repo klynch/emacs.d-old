@@ -18,4 +18,4 @@
 ;;org-show-siblings
 ;;org-show-entry-below
 
-(provide 'config-org)
+(provide 'conf-org)

@@ -1,4 +1,4 @@
-;;; config-registers.el --- Set up registers
+;;; conf-registers.el --- Set up registers
 ;;
 ;; Part of the Emacs Starter Kit
 
@@ -12,9 +12,9 @@
 (eval-when-compile (require 'cl))
 
 (dolist (r `((?i (file . ,(expand-file-name-dotemacs"init.el")))
-             (?b (file . ,(expand-file-name-dotemacs "config-bindings.el")))
-             (?r (file . ,(expand-file-name-dotemacs "config-registers.el")))))
+             (?b (file . ,(expand-file-name-dotemacs "conf-bindings.el")))
+             (?r (file . ,(expand-file-name-dotemacs "conf-registers.el")))))
   (set-register (car r) (cadr r)))
 
-(provide 'config-registers)
+(provide 'conf-registers)
 ;;; config-registers.el ends here

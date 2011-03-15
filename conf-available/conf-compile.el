@@ -98,4 +98,4 @@
 ;;     (call-interactively 'compile)))
 
 
-(provide 'config-compile)
+(provide 'conf-compile)

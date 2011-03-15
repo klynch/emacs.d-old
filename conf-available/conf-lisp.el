@@ -12,4 +12,4 @@
 
 ;; (setq lisp-indent-function 'common-lisp-indent-function)
 
-(provide 'config-lisp)
+(provide 'conf-lisp)

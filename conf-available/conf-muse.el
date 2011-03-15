@@ -15,4 +15,4 @@
 ;;                     :base-url "http://www.example.com/blog/"
 ;;                     :path "~/Projects/Blog/output/"))
 
-(provide 'config-muse)
+(provide 'conf-muse)

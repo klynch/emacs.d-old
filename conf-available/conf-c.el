@@ -20,4 +20,4 @@
 ;; Set the indentation width for C-style programming languages
 (setq-default c-basic-offset 2)
 
-(provide 'config-c)
+(provide 'conf-c)

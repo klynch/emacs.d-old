@@ -62,4 +62,4 @@
 
 ;; (add-hook 'find-file-hook 'flymake-find-file-hook)
 
-(provide 'config-python)
+(provide 'conf-python)

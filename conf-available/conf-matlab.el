@@ -21,4 +21,4 @@
             (define-key inferior-octave-mode-map [down]
               'comint-next-input)))
 
-(provide 'config-matlab)
+(provide 'conf-matlab)

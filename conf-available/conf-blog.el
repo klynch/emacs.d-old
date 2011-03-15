@@ -1,6 +1,6 @@
 (eval-when-compile (require 'cl))
 
-(require 'config-bindings)
+(require 'conf-bindings)
 (define-key k-minor-mode-map (kbd "\C-c e")  'weblogger-start-entry)
 
 ;; we want our drafts hidden away. Default is ~/Mail/drafts
@@ -22,4 +22,4 @@
                                             (set-default 'truncate-lines nil)))
      ))
 
-(provide 'config-blog)
+(provide 'conf-blog)

@@ -30,4 +30,4 @@
 (global-set-key "\C-cTfa" 'twit-add-favorite)	        ; (f)avorite (a)dd
 (global-set-key "\C-cTfr" 'twit-remove-favorite)      ; (f)avorite (r)emove
 
-(provide 'config-twit)
+(provide 'conf-twit)

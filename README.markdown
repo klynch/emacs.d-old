@@ -94,7 +94,7 @@ and what you want Emacs to be.
 		git submodule update
 
 6. Configure [ELPA][], the Emacs Lisp Package Archive, from within Emacs by
-running `M-x config-elpa-install`.
+running `M-x elpa-install`.
 
 7. Modify the file `~/.emacs.d/private-skel.el` with your personal information
 and move it to `~/.emacs.d/private.el`.
@@ -119,6 +119,18 @@ Describe files:
 * `elpa/*` Libraries from are preferred when [ELPA][] available
 since dependencies are handled automatically, and the burden to update them is
 removed from the user.
+
+## Packages
+
+I grab my elisp files from many sources. There's probably a link in each
+individual elisp file, but this should serve as a starting point for many of
+the packages.
+
+* __[weblogger.el](https://launchpad.net/weblogger-el)__ is used for weblog
+  maintenance via XML-RPC APIs. (Depends on: xml-rpc.el)
+
+* __[xml-rpc.el](https://launchpad.net/xml-rpc-el)__ is an elisp implementation
+  of clienside XML-RPC
 
 
 ## Acknowledgements

@@ -1,4 +1,4 @@
-;;; config-bindings.el --- Configures input.
+;;; conf-bindings.el --- Configures input.
 ;; Sets up key bindings in a minor mode
 
 ;;TODO Map C-x C-m to "rename-file-and-buffer"
@@ -109,4 +109,4 @@
 
 (k-minor-mode t)
 
-(provide 'config-bindings)
+(provide 'conf-bindings)

@@ -27,6 +27,7 @@ absolute, then it expands to the file NAME inside `user-emacs-directory`."
         (normal-top-level-add-subdirs-to-load-path))))
 
 (add-to-list 'load-path user-emacs-directory)
+(add-to-list 'load-path conf-available)
 
 ;; We don't want the custom file cluttering our beautiful .emacs file
 (setq custom-file (expand-file-name-dotemacs "custom.el"))
@@ -36,8 +37,10 @@ absolute, then it expands to the file NAME inside `user-emacs-directory`."
 (load generated-autoload-file 'noerror)
 
 ;; Let's not share our private stuff
-(defvar private-file (expand-file-name-dotemacs "private.el"))
-(load private-file 'noerror)
+(defvar conf-private
+  (expand-file-name-dotemacs "private.el")
+  "Contains all private settings that should not be shared with others.")
+(load conf-private 'noerror)
 
 ;; Where all of our custom extensions and what not go
 (defvar elisp-dir (expand-file-name-dotemacs "elisp"))
@@ -58,13 +61,13 @@ absolute, then it expands to the file NAME inside `user-emacs-directory`."
 (add-to-list 'load-path (expand-file-name-dotemacs "elpa"))
 (require 'package)
 (package-initialize)
-(require 'config-elpa)
+(require 'conf-elpa)
 
 (autoload 'magit-status "magit" nil t)
 
 ;; Use our own CEDET
 ;;(add-to-list 'load-path (expand-file-name-dotemacs "cedet/common"))
-;;(require 'config-cedet)
+;;(require 'conf-cedet)
 
 ;;TODO umask!
 
@@ -81,27 +84,27 @@ absolute, then it expands to the file NAME inside `user-emacs-directory`."
  (mapcar 'load-conf-file
          (delete ".." (delete "." (directory-files conf-enabled)))))
 
-(require 'config-blog)
-(require 'config-registers)
-(require 'config-message)
-;;(require 'config-twit)
-(require 'config-defuns)
-(require 'config-shell)
-(require 'config-bindings)
-(require 'config-misc)
-(require 'config-complete)
-;;(require 'config-muse)
-(require 'config-compile)
-(require 'config-diff)
-(require 'config-text)
-(require 'config-c)
-(require 'config-matlab)
-(require 'config-latex)
-(require 'config-lisp)
-(require 'config-ruby)
-(require 'config-python)
-(require 'config-org)
-(require 'config-auto-mode)
+(require 'conf-blog)
+(require 'conf-registers)
+(require 'conf-message)
+;;(require 'conf-twit)
+(require 'conf-defuns)
+(require 'conf-shell)
+(require 'conf-bindings)
+(require 'conf-misc)
+(require 'conf-complete)
+;;(require 'conf-muse)
+(require 'conf-compile)
+(require 'conf-diff)
+(require 'conf-text)
+(require 'conf-c)
+(require 'conf-matlab)
+(require 'conf-latex)
+(require 'conf-lisp)
+(require 'conf-ruby)
+(require 'conf-python)
+(require 'conf-org)
+(require 'conf-auto-mode)
 
 (todochiku-message "Emacs"
                    (format ".emacs loaded in %ds"

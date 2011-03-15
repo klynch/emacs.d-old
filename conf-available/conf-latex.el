@@ -12,4 +12,4 @@
 (when (load "flyspell" t)
   (setq flyspell-issue-message-flag nil))
 
-(provide 'config-latex)
+(provide 'conf-latex)

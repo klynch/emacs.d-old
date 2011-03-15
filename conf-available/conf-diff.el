@@ -51,4 +51,4 @@
 
 (add-to-list 'command-switch-alist '("diff" . command-line-diff))
 
-(provide 'config-diff)
+(provide 'conf-diff)

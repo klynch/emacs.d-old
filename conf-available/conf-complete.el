@@ -38,4 +38,4 @@
 
 ;; (setq ac-dwim t)
 
-(provide 'config-complete)
+(provide 'conf-complete)

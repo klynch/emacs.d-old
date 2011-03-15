@@ -1,4 +1,4 @@
-;;; config-misc.el --- Tweaks Emacs behavioural configuration flags
+;;; conf-misc.el --- Tweaks Emacs behavioural configuration flags
 
 (eval-when-compile (require 'cl))
 
@@ -142,4 +142,4 @@
 (ido-mode 1)
 
 
-(provide 'config-misc)
+(provide 'conf-misc)

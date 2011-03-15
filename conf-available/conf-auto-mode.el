@@ -41,4 +41,4 @@
 (add-to-list 'auto-mode-alist '("\\.mdt$"      . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 
-(provide 'config-auto-mode)
+(provide 'conf-auto-mode)

@@ -10,4 +10,4 @@
 
 ;;TODO make message alias functions like (msg ...)
 
-(provide 'config-message)
+(provide 'conf-message)

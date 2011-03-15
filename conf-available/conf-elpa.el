@@ -1,4 +1,4 @@
-;;; config-elpa.el --- Install a base set of packages automatically.
+;;; conf-elpa.el --- Install a base set of packages automatically.
 ;;
 ;; Part of the Emacs Starter Kit
 
@@ -51,4 +51,4 @@ just have to assume it's online."
 ;; Workaround for bug in the ELPA package for yaml-mode
 (autoload 'yaml-mode "yaml-mode" "" t)
 
-(provide 'config-elpa)
+(provide 'conf-elpa)

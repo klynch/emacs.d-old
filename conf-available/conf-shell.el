@@ -211,4 +211,4 @@
         (ansi-term term-cmd)))))
 
 
-(provide 'config-shell)
+(provide 'conf-shell)
