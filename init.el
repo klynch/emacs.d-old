@@ -31,7 +31,7 @@ absolute, then it expands to the file NAME inside `user-emacs-directory'."
   (dolist (dir load-path)
     (when (string-match (concat "^" (expand-file-name user-emacs-directory)) dir)
       (update-directory-autoloads dir)))
-  (load-file generated-autoload-file 'noerror))
+  (load generated-autoload-file 'noerror))
 
 (defun load-conf-file (file)
   "Loads the config file located in conf-enabled directory"
