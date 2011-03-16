@@ -1,22 +1,39 @@
-;;; conf-elpa.el --- Install a base set of packages automatically.
+;;; conf-elpals.el --- Install a base set of packages automatically.
 ;;
 ;; Part of the Emacs Starter Kit
 
 (eval-when-compile (require 'cl))
 
-(defvar config-packages (list 'idle-highlight
-                              'ruby-mode
-                              'inf-ruby
-                              'css-mode
-                              'yaml-mode
-                              'find-file-in-project
-                              ;; 'magit
-                              'gist
-                              'muse
-                              )
+(defvar packages (list 'idle-highlight
+                       'ruby-mode
+                       'inf-ruby
+                       'css-mode
+                       'yaml-mode
+                       'find-file-in-project
+                       ;; 'magit
+                       'gist
+                       'muse
+                       )
   "Libraries that should be installed by default.")
 
-(defun config-elpa-install ()
+;;;###autoload
+(defun conf-elpa-load ()
+  "Configure ELPA and initialize all packages"
+  (interactive)
+  (setq package-user-dir (expand-file-name-dotemacs "elpa"))
+  (add-to-list 'load-path package-user-dir)
+  (require 'package)
+  (package-initialize))
+
+(conf-elpa-load)
+
+
+
+;; On your first run, this should pull in all the base packages.
+;; (when (esk-online?)
+;;   (unless package-archive-contents (package-refresh-contents))
+;;   (config-elpa-install))
+(defun elpa-install ()
   "Install all config packages that aren't installed."
   (interactive)
   (dolist (package config-packages)
@@ -38,11 +55,6 @@ just have to assume it's online."
                                                         (car iface)))))))
             (network-interface-list))
     t))
-
-;; On your first run, this should pull in all the base packages.
-;; (when (esk-online?)
-;;   (unless package-archive-contents (package-refresh-contents))
-;;   (config-elpa-install))
 
 ;; Workaround for an ELPA bug that people are reporting but I've been
 ;; unable to reproduce:
