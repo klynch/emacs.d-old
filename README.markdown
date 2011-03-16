@@ -106,6 +106,7 @@ without changing your configuration files by running
 
 from the command line.
 
+9. Run `M-x update-autoloads` to generate loaddefs.el
 
 ## Structure
 

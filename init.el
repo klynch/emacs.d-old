@@ -24,6 +24,15 @@ absolute, then it expands to the file NAME inside `user-emacs-directory'."
         (add-to-list 'load-path my-lisp-dir)
         (normal-top-level-add-subdirs-to-load-path))))
 
+(defun update-autoloads ()
+  "Iterates through all elisp files under the
+`user-emacs-directory' to update any autoloads"
+  (interactive)
+  (dolist (dir load-path)
+    (when (string-match (concat "^" (expand-file-name user-emacs-directory)) dir)
+      (update-directory-autoloads dir)))
+  (load-file generated-autoload-file 'noerror))
+
 (defun load-conf-file (file)
   "Loads the config file located in conf-enabled directory"
   (require (intern (file-name-sans-extension file))
