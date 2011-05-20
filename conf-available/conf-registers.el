@@ -11,10 +11,10 @@
 
 (eval-when-compile (require 'cl))
 
-(dolist (r `((?i (file . ,(expand-file-name-dotemacs"init.el")))
-             (?b (file . ,(expand-file-name-dotemacs "conf-bindings.el")))
-             (?r (file . ,(expand-file-name-dotemacs "conf-registers.el")))))
+(dolist (r `((?i (file . ,(expand-file-name-dotemacs "init.el")))
+             (?b (file . ,(expand-file-name "conf-bindings.el" conf-available)))
+             (?r (file . ,(expand-file-name "conf-registers.el" conf-available)))))
   (set-register (car r) (cadr r)))
 
 (provide 'conf-registers)
-;;; config-registers.el ends here
+;;; conf-registers.el ends here
