@@ -43,13 +43,34 @@
   (let (parens-require-spaces)
     (insert-pair)))
 
-
 ;; (defun electric-pair ()
 ;;   "If at end of line, insert character pair without surrounding spaces.
 ;;    Otherwise, just insert the typed character."
 ;;   (interactive)
 ;;   (if (eolp) (let (parens-require-spaces) (insert-pair))
 ;;     (self-insert-command 1)))
+
+(defvar electric-pair-goto-close t
+  "Non-nill indicates to move point to the next }, otherwise insert }
+and delete the following }.")
+
+(defun electric-pair-close (char)
+  "takes a char e.g. one of ) ] } etc. and avoids inserting
+closing character if it is next. Should really use the same
+pair-alist that `insert-pair' uses."
+  (interactive)
+  (let ((p (point)))
+    (if electric-pair-goto-close
+        (unless (search-forward char nil t)
+          (message "No close brace found")
+          (insert char))
+      (insert char)
+      (save-excursion (if (search-forward char nil t)
+                           (delete-char -1))))))
+
+(defun electric-pair-close-paren () (interactive) (electric-pair-close ")"))
+(defun electric-pair-close-bracket () (interactive) (electric-pair-close "]"))
+(defun electric-pair-close-brace () (interactive) (electric-pair-close "}"))
 
 (defun indent-page ()
   "Indent the entire buffer."
@@ -107,6 +128,13 @@
 
 ;; (global-set-key (kbd "<f7>") 'copy-to-register-1)
 ;; (global-set-key (kbd "<f8>") 'insert-register-content-1)
+
+(defun replace-last-sexp ()
+  "Evaluates the previous sexp, and replaces it with the result"
+  (interactive)
+  (let ((value (eval (preceding-sexp))))
+    (kill-sexp -1)
+    (insert (format "%s" value))))
 
 
 ;;; ALIASES
