@@ -7,16 +7,18 @@
 ;;; Electric Pairs
 (add-hook 'python-mode-hook
           (lambda ()
-            ;; (define-key python-mode-map "\"" 'electric-pair)
-            ;; (define-key python-mode-map "\'" 'electric-pair)
-            ;; (define-key python-mode-map "(" 'electric-pair)
-            ;; (define-key python-mode-map "[" 'electric-pair)
-            ;; (define-key python-mode-map "{" 'electric-pair)
-            (define-key python-mode-map "\C-m" 'newline-and-indent)
+            (define-key py-mode-map "\"" 'electric-pair)
+            (define-key py-mode-map "\'" 'electric-pair)
+            (define-key py-mode-map "(" 'electric-pair)
+            (define-key py-mode-map "[" 'electric-pair)
+            (define-key py-mode-map "{" 'electric-pair)
+            (define-key py-mode-map "\C-m" 'newline-and-indent)
+            ;; (define-key py-mode-map ")" 'electric-pair-close-paren)
+            ;; (define-key py-mode-map "]" 'electric-pair-close-bracket)
+            ;; (define-key py-mode-map "}" 'electric-pair-close-brace)
+
             (setq indent-tabs-mode nil)
             (setq tab-width 4)))
-
-
 
 ;;(autoload 'rst-mode "rst-mode" "RST Mode." t)
 ;;(add-to-list 'auto-mode-alist '("\\.rst$"  . rst-mode))
