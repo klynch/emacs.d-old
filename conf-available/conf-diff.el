@@ -34,7 +34,7 @@
 
 
 ;; http://www.emacswiki.org/emacs/EdiffMode
-;; (setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-split-window-function 'split-window-horizontally)
 ;; (setq ediff-split-window-function (lambda (&optional arg)
 ;;                                     (if (> (frame-width) 150)
 ;;                                         (split-window-horizontally arg)
