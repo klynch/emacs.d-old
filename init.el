@@ -101,6 +101,7 @@ absolute, then it expands to the file NAME inside `user-emacs-directory'."
 
 ;;TODO umask!
 
+(require 'conf-layout)
 (require 'conf-blog)
 ;;(require 'conf-registers)
 (require 'conf-message)
