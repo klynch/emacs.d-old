@@ -33,10 +33,6 @@
 (define-key k-minor-mode-map [C-home] 'beginning-of-buffer)
 
 ;; Pager stuff
-(autoload 'pager-row-up    "pager" nil t)
-(autoload 'pager-page-up   "pager" nil t)
-(autoload 'pager-row-down  "pager" nil t)
-(autoload 'pager-page-down "pager" nil t)
 (define-key k-minor-mode-map [M-up]          'pager-row-up)
 (define-key k-minor-mode-map [M-down]        'pager-row-down)
 (define-key k-minor-mode-map [prior]         'pager-page-up)
@@ -65,6 +61,8 @@
 (define-key k-minor-mode-map [C-kp-enter]    'other-window)
 (define-key k-minor-mode-map [C-kp-add]      'enlarge-window)
 (define-key k-minor-mode-map [C-kp-subtract] 'shrink-window)
+
+(define-key k-minor-mode-map (kbd "\C-x C-S-e")  'replace-last-sexp)
 
 (define-key k-minor-mode-map (kbd "\C-x f")  'make-frame)
 (define-key k-minor-mode-map (kbd "\C-x g")  'delete-frame)
