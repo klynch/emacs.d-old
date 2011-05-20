@@ -4,6 +4,8 @@
 ;;; EShell Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setenv "EDITOR" "eshell/emacs")
+
 ;; All config files should be contained in `user-emacs-directory'
 (setq eshell-directory-name (expand-file-name-dotemacs "eshell/"))
 
