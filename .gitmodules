@@ -10,3 +10,6 @@
 [submodule "elisp/org-mode"]
 	path = elisp/org-mode
 	url = git://repo.or.cz/org-mode.git
+[submodule "snippets/licenses/text-mode"]
+	path = snippets/licenses/text-mode
+	url = git@github.com:klynch/yasnippet-licenses.git
