@@ -1,6 +1,5 @@
 *.elc
 images
-private.el
 elpa/archive-contents
 elpa/builtin-packages
 tramp
@@ -10,3 +9,10 @@ tramp
 ac-comphist.dat
 eshell
 ido.last
+url
+signatures.txt
+
+private.el
+*.gpg
+loaddefs.el
+templates
