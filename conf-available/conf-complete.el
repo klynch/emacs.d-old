@@ -7,7 +7,11 @@
 
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory snippets-dir)
+(setq yas/root-directory (list (expand-file-name "master" snippets-dir)
+                               (expand-file-name "licenses" snippets-dir) ))
+;; (yas/load-directory snippets-dir)
+;; (yas/load-directory yas/root-directory)
+(yas/reload-all)
 
 ;;(add-to-list 'auto-mode-alist '(snippets-dir . snippet-mode))
 
