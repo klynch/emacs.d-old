@@ -13,3 +13,6 @@
 [submodule "snippets/licenses/text-mode"]
 	path = snippets/licenses/text-mode
 	url = git@github.com:klynch/yasnippet-licenses.git
+[submodule "elisp/yasnippet"]
+	path = elisp/yasnippet
+	url = git@github.com:klynch/yasnippet.git
