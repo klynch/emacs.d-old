@@ -20,6 +20,10 @@
             (setq indent-tabs-mode nil)
             (setq tab-width 4)))
 
+;; We never want to edit bytecode
+(add-to-list 'completion-ignored-extensions ".pyc")
+
+
 ;;(autoload 'rst-mode "rst-mode" "RST Mode." t)
 ;;(add-to-list 'auto-mode-alist '("\\.rst$"  . rst-mode))
 ;;(add-to-list 'auto-mode-alist '("\\.rest$" . rst-mode))
