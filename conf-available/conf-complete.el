@@ -7,11 +7,12 @@
 
 (require 'yasnippet)
 (yas/initialize)
-(setq yas/root-directory (list (expand-file-name "master" snippets-dir)
-                               (expand-file-name "licenses" snippets-dir) ))
-;; (yas/load-directory snippets-dir)
-;; (yas/load-directory yas/root-directory)
-(yas/reload-all)
+(setq yas/snippet-dirs (list (expand-file-name "yasnippet/snippets" elisp-dir)
+                             (expand-file-name "licenses" snippets-dir) ))
+;;(yas/load-directory yas/snippet-dirs)
+;;(yas/reload-all)
+
+;;(yas/minor-mode)
 
 ;;(add-to-list 'auto-mode-alist '(snippets-dir . snippet-mode))
 
