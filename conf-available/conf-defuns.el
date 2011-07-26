@@ -136,6 +136,10 @@ pair-alist that `insert-pair' uses."
     (kill-sexp -1)
     (insert (format "%s" value))))
 
+(defun uuid ()
+  "Generate a uuid with uuidgen"
+  (interactive)
+  (shell-command "uuidgen"))
 
 ;;; ALIASES
 (defalias 'gf 'grep-find)
