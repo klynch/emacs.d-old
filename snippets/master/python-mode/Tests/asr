@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Assert Raises
+# key: asr
+# contributor: Kevin Lynch <klynch@gmail.com>
+# --
+self.assertRaises(${1:exception}, ${2:callable})

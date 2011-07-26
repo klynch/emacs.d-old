@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: try/except/finally
+# key: try
+# contributor: Kevin Lynch <klynch@gmail.com>
+# --
+try:
+	${1:pass}
+except ${2:Exception}, ${3:e}:
+	${4:raise $3}
+finally:
+	${5:pass}
+$0

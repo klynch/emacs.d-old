@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+#name : Python File Header (Full)
+#key : hdrf
+# --
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+ """`(buffer-name)`: ${1:Description of what `(buffer-name)` does.}"""
+
+__author__ = "${2:`(user-full-name)`}${3:$(unless (string= text "") " <")}${3:`user-mail-address`}${3:$(unless (string= text "") ">")}"
+__credits__ = [ "$2" ]
+__maintainer__ = "$2"
+__version__ = "${4:1.0}"
+__date__ = "${5:`(current-time-string)`}"
+__status__ = "${6:Development$$(yas/choose-value '("Production" "Prototype" "Development"))}"
+__copyright__ = "Copyright `(nth 5 (decode-time))`, $2"
+__license__ = "${7:GPL}"
+
+$0

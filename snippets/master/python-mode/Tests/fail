@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Fail
+# key: fail
+# contributor: Kevin Lynch <klynch@gmail.com>
+# --
+self.fail('${1:message}')

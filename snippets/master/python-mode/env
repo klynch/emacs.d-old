@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Interpreter directive
+# key: env
+# contributor: Kevin Lynch <klynch@gmail.com>
+# type: snippet
+# --
+#!/usr/bin/env python

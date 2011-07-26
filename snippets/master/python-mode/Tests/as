@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Assert
+# key: as
+# contributor: Kevin Lynch <klynch@gmail.com>
+# --
+self.assert_(${1:boolean expression}${2:, 'message'})

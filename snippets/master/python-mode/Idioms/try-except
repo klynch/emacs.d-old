@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: try/except
+# key: try
+# contributor: Kevin Lynch <klynch@gmail.com>
+# --
+try:
+	${1:pass}
+except ${2:Exception}, ${3:e}:
+	${4:raise $3}
+$0

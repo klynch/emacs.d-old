@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Assert Not Equal
+# key: asne
+# contributor: Kevin Lynch <klynch@gmail.com>
+# --
+self.assertNotEqual(${1:expected}, ${2:actual}${3:, 'message'})
