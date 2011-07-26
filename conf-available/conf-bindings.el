@@ -18,6 +18,8 @@
 
 (defvar k-minor-mode-map (make-keymap) "k-minor-mode keymap.")
 
+(if window-system (global-set-key (kbd "\C-z") nil))
+
 ;; Make the `Delete' key delete the char under the cursor
 (define-key k-minor-mode-map [delete]        'delete-char)
 (define-key k-minor-mode-map [kp-delete]     'delete-char)
@@ -53,9 +55,9 @@
 (define-key k-minor-mode-map [f7]            'indent-page)
 (define-key k-minor-mode-map [f8]            'magit-status)
 
-;; cycle through buffers
-(define-key k-minor-mode-map [C-tab]         'bs-cycle-next)
-(define-key k-minor-mode-map [C-S-tab]       'bs-cycle-previous)
+;; ;; cycle through buffers
+;; (define-key k-minor-mode-map [C-tab]         'bs-cycle-next)
+;; (define-key k-minor-mode-map [C-S-tab]       'bs-cycle-previous)
 
 ;; window stuff
 (define-key k-minor-mode-map [C-kp-enter]    'other-window)
@@ -69,7 +71,7 @@
 
 (define-key k-minor-mode-map (kbd "\C-x j")  'jump-to-register)
 
-(define-key k-minor-mode-map (kbd "\C-x p")  'align-regexp)
+;; (define-key k-minor-mode-map (kbd "\C-x p")  'align-regexp)
 
 (define-key k-minor-mode-map (kbd "\C-c c")  'compile)
 (define-key k-minor-mode-map (kbd "\C-c g")  'goto-line)
