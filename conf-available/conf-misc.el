@@ -102,7 +102,7 @@
 ;;  http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
 ;;  http://www.emacswiki.org/emacs/InteractivelyDoThings
 
-(setq ido-save-directory-list-file (expand-file-name-dotemacs "ido.last"))
+(setq ido-save-directory-list-file (expand-dotemacs "ido.last"))
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (setq ido-create-new-buffer 'always)

@@ -11,7 +11,7 @@
 ;;; Loading Functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun expand-file-name-dotemacs (name)
+(defun expand-dotemacs (name)
   "Converts NAME to absolute, and canonicalize it. If NAME is not
 absolute, then it expands to the file NAME inside `user-emacs-directory'."
   (expand-file-name name user-emacs-directory))
@@ -23,6 +23,15 @@ absolute, then it expands to the file NAME inside `user-emacs-directory'."
              (default-directory my-lisp-dir))
         (add-to-list 'load-path my-lisp-dir)
         (normal-top-level-add-subdirs-to-load-path))))
+
+(defvar elisp-dir (file-name-as-directory (expand-dotemacs "elisp"))
+  "Where all of our custom extensions and what not go")
+(add-subdirs-to-load-path elisp-dir)
+
+(defun expand-elisp (name)
+  "Converts NAME to absolute, and canonicalize it. If NAME is not
+absolute, then it expands to the file NAME inside `elisp-dir'."
+  (expand-file-name name elisp-dir))
 
 (defun update-autoloads ()
   "Iterates through all elisp files under the
@@ -53,33 +62,30 @@ absolute, then it expands to the file NAME inside `user-emacs-directory'."
 ;; ~/.emacs.d/ should be added
 (add-to-list 'load-path user-emacs-directory)
 
-(defvar conf-available (expand-file-name-dotemacs "conf-available")
+(defvar conf-available (expand-dotemacs "conf-available")
   "Contains all custom emacs configuration files available.")
-(defvar conf-enabled (expand-file-name-dotemacs "conf-enabled")
+
+(defvar conf-enabled (expand-dotemacs "conf-enabled")
   "Contains all emacs config files from `conf-enabled' that are
   to be loaded at startup.")
 
 (add-to-list 'load-path conf-available)
 
 ;; We don't want the custom file cluttering our beautiful .emacs file
-(setq custom-file (expand-file-name-dotemacs "custom.el"))
+(setq custom-file (expand-dotemacs "custom.el"))
 
 ;; Specify our own file to prevent emacs from using a system one
-(setq generated-autoload-file (expand-file-name-dotemacs "loaddefs.el"))
+(setq generated-autoload-file (expand-dotemacs "loaddefs.el"))
 (load generated-autoload-file 'noerror)
 
-;; Let's not share our private stuff
-(defvar conf-private (expand-file-name-dotemacs "private.el")
-  "Contains all private settings that should not be shared with others.")
+(defvar conf-private (expand-dotemacs "private.el")
+  "Contains private settings. Must not be shared with others.")
 (load conf-private 'noerror)
 
-;; Where all of our custom extensions and what not go
-(defvar elisp-dir (expand-file-name-dotemacs "elisp"))
-(add-subdirs-to-load-path elisp-dir)
-
-;; We should add our custom image path to the front. This guarantees that we
-;; have a modifiable directory
-(add-to-list 'image-load-path (expand-file-name-dotemacs "images/"))
+;; Add our custom image path to the front to guarantee that we have a
+;; modifiable directory
+(add-to-list 'image-load-path
+             (file-name-as-directory (expand-dotemacs "images")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Set Color Theme
@@ -96,7 +102,7 @@ absolute, then it expands to the file NAME inside `user-emacs-directory'."
 (require 'conf-elpa)
 
 ;; Use our own CEDET
-;;(add-to-list 'load-path (expand-file-name-dotemacs "cedet/common"))
+;;(add-to-list 'load-path (expand-dotemacs "cedet/common"))
 ;;(require 'conf-cedet)
 
 ;;TODO umask!
@@ -121,7 +127,7 @@ absolute, then it expands to the file NAME inside `user-emacs-directory'."
 (require 'conf-lisp)
 (require 'conf-ruby)
 (require 'conf-python)
-(require 'conf-org)
+;;(require 'conf-org)
 (require 'conf-auto-mode)
 
 (todochiku-message "Emacs"
@@ -131,4 +137,6 @@ absolute, then it expands to the file NAME inside `user-emacs-directory'."
                                 (+ (first *emacs-load-start*)
                                    (second *emacs-load-start*)))))
                    (todochiku-icon 'check))
+
 (put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)

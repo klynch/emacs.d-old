@@ -4,7 +4,7 @@
 (define-key k-minor-mode-map (kbd "\C-c e")  'weblogger-start-entry)
 
 ;; we want our drafts hidden away. Default is ~/Mail/drafts
-(setq message-auto-save-directory (expand-file-name-dotemacs "drafts"))
+(setq message-auto-save-directory (expand-dotemacs "drafts"))
 
 (eval-after-load 'weblogger
   '(progn

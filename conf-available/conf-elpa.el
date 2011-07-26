@@ -16,16 +16,21 @@
                        )
   "Libraries that should be installed by default.")
 
+(when (require 'package (expand-dotemacs "elpa/package.el") 'noerror)
+  (package-initialize))
+(require 'package)
+
+
 ;;;###autoload
 (defun conf-elpa-load ()
   "Configure ELPA and initialize all packages"
   (interactive)
-  (setq package-user-dir (expand-file-name-dotemacs "elpa"))
-  (add-to-list 'load-path package-user-dir)
+  ;;(setq package-user-dir (expand-dotemacs "elpa"))
+  ;;(add-to-list 'load-path package-user-dir) ;; TODO is this necessary?
   (require 'package)
   (package-initialize))
 
-(conf-elpa-load)
+;;(conf-elpa-load)
 
 
 

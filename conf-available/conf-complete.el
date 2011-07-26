@@ -3,16 +3,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; YaSnippet
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar snippets-dir (expand-file-name-dotemacs "snippets"))
+(defvar snippets-dir (expand-dotemacs "snippets")
+  "The directory where all of our snippets are stored")
 
 (require 'yasnippet)
-(yas/initialize)
-(setq yas/snippet-dirs (list (expand-file-name "yasnippet/snippets" elisp-dir)
-                             (expand-file-name "licenses" snippets-dir) ))
-;;(yas/load-directory yas/snippet-dirs)
-;;(yas/reload-all)
 
-;;(yas/minor-mode)
+(setq yas/snippet-dirs (expand-file-name "master" snippets-dir))
+
+(yas/load-directory yas/snippet-dirs)
+(yas/initialize)
 
 ;;(add-to-list 'auto-mode-alist '(snippets-dir . snippet-mode))
 
