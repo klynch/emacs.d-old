@@ -41,4 +41,17 @@
 (add-to-list 'auto-mode-alist '("\\.mdt$"      . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 
+
+;; Allow editing of binary .plist files.
+(add-to-list 'jka-compr-compression-info-list
+             ["\\.plist$"
+              "converting text XML to binary plist"
+              "plutil"
+              ("-convert" "binary1" "-o" "-" "-")
+              "converting binary plist to text XML"
+              "plutil"
+              ("-convert" "xml1" "-o" "-" "-")
+              nil nil "bplist"])
+(jka-compr-update)
+
 (provide 'conf-auto-mode)
