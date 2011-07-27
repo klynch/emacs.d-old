@@ -16,3 +16,6 @@
 [submodule "elisp/yasnippet"]
 	path = elisp/yasnippet
 	url = git@github.com:klynch/yasnippet.git
+[submodule "elisp/ace-jump-mode"]
+	path = elisp/ace-jump-mode
+	url = https://github.com/winterTTr/ace-jump-mode.git
