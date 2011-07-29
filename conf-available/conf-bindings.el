@@ -18,7 +18,8 @@
 
 (defvar k-minor-mode-map (make-keymap) "k-minor-mode keymap.")
 
-(if window-system (global-set-key (kbd "\C-z") nil))
+(if window-system (progn (global-set-key (kbd "\C-z") nil)
+                         (global-set-key (kbd "\C-x \C-z") nil)))
 
 ;; Make the `Delete' key delete the char under the cursor
 (define-key k-minor-mode-map [delete]        'delete-char)

@@ -19,3 +19,6 @@
 [submodule "elisp/ace-jump-mode"]
 	path = elisp/ace-jump-mode
 	url = https://github.com/winterTTr/ace-jump-mode.git
+[submodule "elisp/workgroups"]
+	path = elisp/workgroups
+	url = https://github.com/tlh/workgroups.el.git
