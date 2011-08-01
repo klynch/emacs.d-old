@@ -152,4 +152,17 @@
 
 (do-if-require 'ace-jump-mode 'config-ace-jump-mode)
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Workgroups for Windows (for Emacs)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun config-workgroups ()
+  ;; (setq wg-prefix-key (kbd "C-c w")) ;; Defaults to C-z
+  ;; (wg-load (path "workgroups"))
+  (workgroups-mode 1))
+
+(do-if-require 'workgroups 'config-workgroups)
+
 (provide 'conf-misc)
