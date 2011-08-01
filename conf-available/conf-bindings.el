@@ -18,8 +18,8 @@
 
 (defvar k-minor-mode-map (make-keymap) "k-minor-mode keymap.")
 
-(if window-system (progn (global-set-key (kbd "\C-z") nil)
-                         (global-set-key (kbd "\C-x \C-z") nil)))
+(if window-system (progn (global-set-key (kbd "C-z") nil)
+                         (global-set-key (kbd "C-x C-z") nil)))
 
 ;; Make the `Delete' key delete the char under the cursor
 (define-key k-minor-mode-map [delete]        'delete-char)
@@ -42,8 +42,8 @@
 (define-key k-minor-mode-map [next]          'pager-page-down)
 (define-key k-minor-mode-map [M-kp-8]        'pager-row-up)
 (define-key k-minor-mode-map [M-kp-2]        'pager-row-down)
-(define-key k-minor-mode-map (kbd "\M-v") 	 'pager-page-up)
-(define-key k-minor-mode-map (kbd "\C-v")	   'pager-page-down)
+(define-key k-minor-mode-map (kbd "M-v")     'pager-page-up)
+(define-key k-minor-mode-map (kbd "C-v")     'pager-page-down)
 
 (define-key k-minor-mode-map [f1]            'man-follow)
 (define-key k-minor-mode-map [f2]            'eshell)
@@ -65,21 +65,21 @@
 (define-key k-minor-mode-map [C-kp-add]      'enlarge-window)
 (define-key k-minor-mode-map [C-kp-subtract] 'shrink-window)
 
-(define-key k-minor-mode-map (kbd "\C-x C-S-e")  'replace-last-sexp)
+(define-key k-minor-mode-map (kbd "C-x C-S-e")  'replace-last-sexp)
 
-(define-key k-minor-mode-map (kbd "\C-x f")  'make-frame)
-(define-key k-minor-mode-map (kbd "\C-x g")  'delete-frame)
+(define-key k-minor-mode-map (kbd "C-x f")  'make-frame)
+(define-key k-minor-mode-map (kbd "C-x g")  'delete-frame)
 
-(define-key k-minor-mode-map (kbd "\C-x j")  'jump-to-register)
+(define-key k-minor-mode-map (kbd "C-x j")  'jump-to-register)
 
-;; (define-key k-minor-mode-map (kbd "\C-x p")  'align-regexp)
+;; (define-key k-minor-mode-map (kbd "C-x p")  'align-regexp)
 
-(define-key k-minor-mode-map (kbd "\C-c c")  'compile)
-(define-key k-minor-mode-map (kbd "\C-c g")  'goto-line)
-(define-key k-minor-mode-map (kbd "\C-c q")  'comment-or-uncomment-region)
-(define-key k-minor-mode-map (kbd "\C-c /")  'comment-or-uncomment-region)
+(define-key k-minor-mode-map (kbd "C-c c")  'compile)
+(define-key k-minor-mode-map (kbd "C-c g")  'goto-line)
+(define-key k-minor-mode-map (kbd "C-c q")  'comment-or-uncomment-region)
+(define-key k-minor-mode-map (kbd "C-c /")  'comment-or-uncomment-region)
 
-(defun debug-key (map dbg) (define-key map (kbd "\C-c d")  dbg))
+(defun debug-key (map dbg) (define-key map (kbd "C-c d")  dbg))
 (add-hook 'c-mode-hook (lambda () (debug-key c-mode-map 'gdb)))
 (add-hook 'c++-mode-hook (lambda () (debug-key c++-mode-map 'gdb)))
 (add-hook 'objc-mode-hook (lambda () (debug-key objc-mode-map 'gdb)))
@@ -88,13 +88,13 @@
 (add-hook 'perl-mode-hook (lambda () (debug-key perl-mode-map 'perldb)))
 ;;(add-hook 'ruby-mode-hook (lambda () (debug-key ruby-mode-map 'rubydb)))
 
-(define-key k-minor-mode-map (kbd "\C-x t")  'toggle-truncate-lines)
-(define-key k-minor-mode-map (kbd "\C-x r")  'toggle-read-only)
-(define-key k-minor-mode-map (kbd "\C-x n")  'nuke-trailing-whitespace)
+(define-key k-minor-mode-map (kbd "C-x t")  'toggle-truncate-lines)
+(define-key k-minor-mode-map (kbd "C-x r")  'toggle-read-only)
+(define-key k-minor-mode-map (kbd "C-x n")  'nuke-trailing-whitespace)
 
-(define-key k-minor-mode-map (kbd "\C-c l")  'org-store-link)
-(define-key k-minor-mode-map (kbd "\C-c a")  'org-agenda)
-(define-key k-minor-mode-map (kbd "\C-c b")  'org-iswitchb)
+(define-key k-minor-mode-map (kbd "C-c l")  'org-store-link)
+(define-key k-minor-mode-map (kbd "C-c a")  'org-agenda)
+(define-key k-minor-mode-map (kbd "C-c b")  'org-iswitchb)
 
 ;; Mouse button 1 drags the scroll bar
 (define-key k-minor-mode-map [vertical-scroll-bar down-mouse-1] 'scroll-bar-drag)
