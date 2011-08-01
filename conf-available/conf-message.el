@@ -5,7 +5,7 @@
 (autoload 'todochiku-icon "todochiku")
 (autoload 'todochiku-in "todochiku" nil t)
 
-(defvar todochiku-icons-directory (expand-dotemacs "todochiku-icons"))
+(defvar todochiku-icons-directory (path "todochiku-icons"))
 (defvar todochiku-message-too t)
 
 ;;TODO make message alias functions like (msg ...)

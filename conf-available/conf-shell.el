@@ -7,7 +7,7 @@
 (setenv "EDITOR" "eshell/emacs")
 
 ;; All config files should be contained in `user-emacs-directory'
-(setq eshell-directory-name (file-name-as-directory (expand-dotemacs "eshell")))
+(setq eshell-directory-name (path "eshell"))
 
 ;;;;;; ESHELL COLOR
 

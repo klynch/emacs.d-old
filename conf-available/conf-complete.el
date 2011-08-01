@@ -5,13 +5,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when (require 'yasnippet nil 'noerror)
-  (defvar snippets-dir (expand-dotemacs "snippets")
+  (defvar snippets-dir (path "snippets")
     "The directory where all of our snippets are stored")
 
-  ;; (setq yas/snippet-dirs (list (expand-file-name "master" snippets-dir)
-  ;;                              (expand-file-name "licenses" snippets-dir)))
+  ;; (setq yas/snippet-dirs (list (path snippets-dir "master")
+  ;;                              (path snippets-dir "licenses")))
 
-  (setq yas/snippet-dirs (expand-file-name "master" snippets-dir))
+  (setq yas/snippet-dirs (path snippets-dir "master"))
 
   (setq yas/prompt-functions '(yas/dropdown-prompt
                                yas/x-prompt
@@ -26,11 +26,12 @@
   (add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
   (add-to-list 'auto-mode-alist '(".yas-setup$"   . emacs-lisp-mode))
 
-  (defun yas/load-django-snippets ()'
+  (defun yas/load-django-snippets ()
     "Load django snippets"
     (interactive)
-    (yas/load-directory (expand-file-name "django" snippets-dir)))
-  )
+    (yas/load-directory (path snippets-dir "django")))
+)
+
 (require 'yasnippet)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40,16 +41,15 @@
 ;;don't break if not installed
 (when (require 'auto-complete-config nil 'noerror)
 
-  (add-to-list 'ac-dictionary-directories
-               (file-name-as-directory elisp-dir)
-               (expand-dotemacs "elisp/auto-complete/dict"))
-  (setq ac-comphist-file (expand-dotemacs "ac-comphist.dat"))
+  (add-to-list 'ac-dictionary-directories (path "elisp"))
+  (add-to-list 'ac-dictionary-directories (path "elisp" "auto-complete" "dict"))
+
+  (setq ac-comphist-file (path "ac-comphist.dat"))
   (setq ac-dwim t)
   (ac-config-default)
 
   (ac-set-trigger-key "TAB")
   (setq ac-auto-start nil)
-
 
   ;; set also the completion for eshell
   (add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
@@ -59,8 +59,6 @@
   (define-key ac-complete-mode-map "\r" 'ac-complete)
   (define-key ac-complete-mode-map "\M-n" 'ac-next)
   (define-key ac-complete-mode-map "\M-p" 'ac-previous)
-
-  (message "auto-complete-config!!")
 
   ;; ;; Disabling Yasnippet completion
   ;; (defun epy-snips-from-table (table)

@@ -1,12 +1,9 @@
 (eval-when-compile (require 'cl))
 
-(defvar org-dir (file-name-as-directory (expand-elisp "org-mode"))
-  "The location of the org-mode directory")
-
-(add-to-list 'load-path (file-name-as-directory (expand-file-name "lisp" org-dir)))
+(add-to-list 'load-path (path elisp-dir "org-mode" "lisp"))
 
 (require 'org-install)
-
+s
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 ;; not needed when global-font-lock-mode is on

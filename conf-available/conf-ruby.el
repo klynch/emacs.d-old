@@ -24,7 +24,7 @@
 (add-to-list 'completion-ignored-extensions ".rbc")
 
 ;; (setq rsense-home (getenv "RSENSE_HOME"))
-;; (add-to-list 'load-path (concat (file-name-as-directory rsense-home) "etc"))
+;; (add-to-list 'load-path (path rsense-home "etc"))
 
 ;; (require 'rsense)
 
