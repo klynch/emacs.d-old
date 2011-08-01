@@ -11,10 +11,26 @@
 ;;; Loading Functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun expand-dotemacs (name)
-  "Converts NAME to absolute, and canonicalize it. If NAME is not
-absolute, then it expands to the file NAME inside `user-emacs-directory'."
-  (expand-file-name name user-emacs-directory))
+(defun path (&rest subdirs)
+  "Concatenates all of the arguments into a single path. If the
+path is absolute, then it returns the absolute canonical path
+representation. Otherwise, it is interpreted relative to
+`user-emacs-directory'. If the path signifies an existing
+directory, the returned string will end in a slash.
+
+Examples:
+  (path \"elisp\" \"org-mode\")
+    => \"/home/uid/.emacs.d/elisp/org-mode/\"
+
+  (path \"init.el\")
+    => \"/home/uid/.emacs.d/init.el\"
+
+  (path \"~\" \"foo\")
+    => \"/home/uid/foo/\""
+  (let ((p (reduce 'expand-file-name (reverse subdirs)
+                   :from-end t
+                   :initial-value user-emacs-directory)))
+    (if (file-directory-p p) (file-name-as-directory p) p)))
 
 (defun add-subdirs-to-load-path (dir)
   "Adds the subdirectories to the list if possible."
@@ -24,68 +40,69 @@ absolute, then it expands to the file NAME inside `user-emacs-directory'."
         (add-to-list 'load-path my-lisp-dir)
         (normal-top-level-add-subdirs-to-load-path))))
 
-(defvar elisp-dir (file-name-as-directory (expand-dotemacs "elisp"))
+(defvar elisp-dir (path "elisp")
   "Where all of our custom extensions and what not go")
 (add-subdirs-to-load-path elisp-dir)
-
-(defun expand-elisp (name)
-  "Converts NAME to absolute, and canonicalize it. If NAME is not
-absolute, then it expands to the file NAME inside `elisp-dir'."
-  (expand-file-name name elisp-dir))
 
 (defun update-autoloads ()
   "Iterates through all elisp files under the
 `user-emacs-directory' to update any autoloads"
   (interactive)
   (dolist (dir load-path)
-    (when (string-match (concat "^" (expand-file-name user-emacs-directory)) dir)
+    (when (string-match (concat "^" (path)) dir)
       (update-directory-autoloads dir)))
   (load generated-autoload-file 'noerror))
 
 (defun load-conf-file (file)
   "Loads the config file located in conf-enabled directory"
   (require (intern (file-name-sans-extension file))
-           (expand-file-name file conf-enabled)))
+           (path conf-enabled file)))
 
 (defun load-conf-enabled ()
- "Loads all of the configuration files linked in
+  "Loads all of the configuration files linked in
 ~/.emacs.d/conf-enabled from ~/.emacs.d/conf-available"
- (make-directory conf-enabled t)
- (make-directory conf-available t)
- (mapcar 'load-conf-file
-         (delete ".." (delete "." (directory-files conf-enabled)))))
+  (make-directory conf-enabled t)
+  (make-directory conf-available t)
+  (mapcar 'load-conf-file
+          (delete ".." (delete "." (directory-files conf-enabled)))))
+
+(defun require-then-call (feature func &optional filename)
+  "Calls `func' when feature is loaded. If filename is provided,
+  then feature is loaded from there."
+  (when (require feature filename 'noerror)
+    (funcall func))
+  (require feature filename 'noerror))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Loading Variables
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; ~/.emacs.d/ should be added
-(add-to-list 'load-path user-emacs-directory)
+(add-to-list 'load-path (path))
 
-(defvar conf-available (expand-dotemacs "conf-available")
+(defvar conf-available (path "conf-available")
   "Contains all custom emacs configuration files available.")
 
-(defvar conf-enabled (expand-dotemacs "conf-enabled")
+(defvar conf-enabled (path "conf-enabled")
   "Contains all emacs config files from `conf-enabled' that are
   to be loaded at startup.")
 
 (add-to-list 'load-path conf-available)
 
 ;; We don't want the custom file cluttering our beautiful .emacs file
-(setq custom-file (expand-dotemacs "custom.el"))
+(setq custom-file (path "custom.el"))
 
 ;; Specify our own file to prevent emacs from using a system one
-(setq generated-autoload-file (expand-dotemacs "loaddefs.el"))
+(setq generated-autoload-file (path "loaddefs.el"))
 (load generated-autoload-file 'noerror)
 
-(defvar conf-private (expand-dotemacs "private.el")
+(defvar conf-private (path "private.el")
   "Contains private settings. Must not be shared with others.")
 (load conf-private 'noerror)
 
 ;; Add our custom image path to the front to guarantee that we have a
 ;; modifiable directory
-(add-to-list 'image-load-path
-             (file-name-as-directory (expand-dotemacs "images")))
+(add-to-list 'image-load-path (path "images"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Set Color Theme
@@ -102,7 +119,7 @@ absolute, then it expands to the file NAME inside `elisp-dir'."
 (require 'conf-elpa)
 
 ;; Use our own CEDET
-;;(add-to-list 'load-path (expand-dotemacs "cedet/common"))
+;;(add-to-list 'load-path (path "cedet" "common"))
 ;;(require 'conf-cedet)
 
 ;;TODO umask!
