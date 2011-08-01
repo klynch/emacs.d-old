@@ -1,0 +1,5 @@
+# name: User's Name and Email
+# contributor: Kevin Lynch <klynch@gmail.com>
+# key: me
+# --
+${1:`(user-full-name)`}${2:$(unless (string= text "") " <")}${2:`user-mail-address`}${2:$(unless (string= text "") ">")}
