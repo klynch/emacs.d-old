@@ -147,7 +147,9 @@
 ;;; AceJump
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'ace-jump-mode)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(defun config-ace-jump-mode ()
+  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode))
+
+(do-if-require 'ace-jump-mode 'config-ace-jump-mode)
 
 (provide 'conf-misc)

@@ -66,12 +66,13 @@ Examples:
   (mapcar 'load-conf-file
           (delete ".." (delete "." (directory-files conf-enabled)))))
 
-(defun require-then-call (feature func &optional filename)
+(defun do-if-require (feature func &optional filename)
   "Calls `func' when feature is loaded. If filename is provided,
-  then feature is loaded from there."
-  (when (require feature filename 'noerror)
-    (funcall func))
-  (require feature filename 'noerror))
+  then feature is loaded from there. Otherwise, quietly indicate
+  a failure to load."
+  (if (require feature filename 'noerror)
+      (funcall func)
+    (message (format "Failed to load: %s" feature))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Loading Variables
