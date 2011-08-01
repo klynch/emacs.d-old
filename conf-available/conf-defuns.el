@@ -163,5 +163,14 @@ pair-alist that `insert-pair' uses."
 (defalias 'o 'open)
 (defalias 'oo 'openo)
 
+(defun revert-buffer-yes () (interactive) (revert-buffer nil t))
+
+(defalias 'rb 'revert-buffer)
+(defalias 'rby 'revert-buffer-yes)
+
+(defun read-only () (interactive) (setq buffer-read-only t))
+(defun read-write () (interactive) (setq buffer-read-only nil))
+(defalias 'ro 'read-only)
+(defalias 'rw 'read-write)
 
 (provide 'conf-defuns)
