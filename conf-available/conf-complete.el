@@ -4,7 +4,7 @@
 ;;; YaSnippet
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(when (require 'yasnippet nil 'noerror)
+(defun config-yasnippet ()
   (defvar snippets-dir (path "snippets")
     "The directory where all of our snippets are stored")
 
@@ -30,17 +30,39 @@
     "Load django snippets"
     (interactive)
     (yas/load-directory (path snippets-dir "django")))
-)
 
-(require 'yasnippet)
+  (defun new-snippet (&optional choose-instead-of-guess)
+    "Create a new snippet"
+    (interactive "P")
+    (let ((guessed-directories (yas/guess-snippet-directories)))
+      (switch-to-buffer "*new snippet*")
+      (erase-buffer)
+      (kill-all-local-variables)
+      (snippet-mode)
+      (set (make-local-variable 'yas/guessed-modes)
+           (mapcar #'(lambda (d)
+                       (intern (yas/table-name (car d))))
+                   guessed-directories))
+      (yas/expand-snippet "\
+# -*- mode: snippet -*-
+# name: $1
+# key: $2
+# binding: $3
+# expand-env:
+# type: ${4:snippet$$(yas/choose-value '(\"command\" \"snippet\"))}
+# --
+$0"))))
+
+(do-if-require 'yasnippet 'config-yasnippet)
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-Complete Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;don't break if not installed
-(when (require 'auto-complete-config nil 'noerror)
-
+(defun config-auto-complete-config ()
   (add-to-list 'ac-dictionary-directories (path "elisp"))
   (add-to-list 'ac-dictionary-directories (path "elisp" "auto-complete" "dict"))
 
@@ -50,6 +72,7 @@
 
   (ac-set-trigger-key "TAB")
   (setq ac-auto-start nil)
+
 
   ;; set also the completion for eshell
   (add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
@@ -109,7 +132,8 @@
   ;; (add-hook 'rope-open-project-hook 'ac-nropemacs-setup)
 
   )
-(require 'auto-complete-config)
+
+(do-if-require 'auto-complete-config 'config-auto-complete-config)
 
 ;; (add-hook 'c++-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-semantic)))
 
