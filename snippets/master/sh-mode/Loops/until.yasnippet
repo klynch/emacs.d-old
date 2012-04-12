@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# uuid: BD23B11F-D940-43D3-A784-17F3D3FABC38
+# key: until
+# contributor: Translated from textmate snippet by PROGRAM_NAME
+# name: until … done
+## condition: "
+# --
+until ${2:[[ ${1:condition} ]]}; do
+	${0:#statements}
+done

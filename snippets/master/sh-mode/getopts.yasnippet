@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: getopts
+# key: getopts
+# type: snippet
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# contributor: Kevin Lynch <klynch@gmail.com>
+# --
+while getopts "${1:h}" ${2:OPT}; do
+    case "$$2" in
+        ${1:$(yas/sh-getopt-case-stmts text)}
+    esac
+done
+shift $(($OPTIND - 1))
+$0

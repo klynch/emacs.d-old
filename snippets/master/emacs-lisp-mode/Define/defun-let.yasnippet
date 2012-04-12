@@ -1,8 +1,9 @@
 #contributor: Kevin Lynch <klynch@gmail.com>
-#name: defun
-#key: dfun
+#name: (defun ... (let ...))
+#key: dfl
 # --
 (defun ${1:fn} (${2:args}${3:$(if (yas/text) " &optional ")}${3:optarg}${4:$(if (yas/text) " &rest ")}${4:restarg})
 	"${5:$1 docstring}"
   (interactive)
-  $0)
+  (let ((${6:sym} ${7:val}))
+  $0))

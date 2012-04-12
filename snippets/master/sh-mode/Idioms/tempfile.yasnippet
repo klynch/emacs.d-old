@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# uuid: 23583387-4ACC-4A27-B6EC-58418A39EF30
+# key: tmpf
+# contributor: Translated from textmate snippet by PROGRAM_NAME
+# name: Tempfile
+## condition: "
+# --
+${1:TMPFILE}="\$(mktemp -t ${2:`echo "${TM_FILENAME%.*}" | sed -E -e 's/[^[:alnum:]]/_/g' -e 's/^$/untitled/'`})"
+trap "${3:rm -f '\$${1/.*\s//}'}" EXIT INT HUP TERM
+$0

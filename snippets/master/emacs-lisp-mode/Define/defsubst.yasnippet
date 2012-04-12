@@ -1,5 +1,6 @@
-#contributor: Xah Lee (XahLee.org)
+#contributor: Kevin Lynch <klynch@gmail.com>
 #name: defsubst
-#key: defsubst
+#key: dsub
 # --
-(defsubst $0 )
+(defsubst ${1:fn} (${2:args}${3:$(if (yas/text) " &optional ")}${3:optarg}${4:$(if (yas/text) " &rest ")}${4:restarg})
+  $0)

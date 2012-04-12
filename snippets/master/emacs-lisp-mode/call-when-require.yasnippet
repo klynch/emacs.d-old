@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: call-when-require
+# key: cwq
+# type: snippet
+# --
+(defun config-${1:feature} ()
+  $0)
+
+(call-when-require '$1 'config-$1)
