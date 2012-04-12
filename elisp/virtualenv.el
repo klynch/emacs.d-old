@@ -1,98 +1,143 @@
-;;; virtualenv.el --- Virtualenv for Python mode  -*- coding: utf-8 -*-
+;;; virtualenv.el --- Switching virtual python enviroments seamlessly
 
- ;; Copyright (c) 2010 - Jesse Legg <jesse@jesselegg.com>
- ;; MIT License
+;; Copyright (C) 2010 Gabriele Lanaro
 
- ;; Permission is hereby granted, free of charge, to any person
- ;; obtaining a copy of this software and associated documentation
- ;; files (the "Software"), to deal in the Software without
- ;; restriction, including without limitation the rights to use,
- ;; copy, modify, merge, publish, distribute, sublicense, and/or sell
- ;; copies of the Software, and to permit persons to whom the
- ;; Software is furnished to do so, subject to the following
- ;; conditions:
+;; Author: Gabriele Lanaro <gabriele.lanaro@gmail.com>
+;; Version: 0.1
+;; Url: http://github.com/gabrielelanaro/emacs-starter-kit
 
- ;; The above copyright notice and this permission notice shall be
- ;; included in all copies or substantial portions of the Software.
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
 
- ;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- ;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- ;; OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- ;; NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- ;; HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- ;; WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- ;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- ;; OTHER DEALINGS IN THE SOFTWARE.
- ;;
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
 
- ;; NOTES:
- ;; Support for virtual environments in python.el. This should 
- ;; probably be converted to a derived mode or something else.
+;; You should have received a copy of the GNU General Public License
+;; along with EMMS; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
 
-(require 'python)
+;;; Commentary:
 
-(defvar virtualenv-postactivate-hook nil)
-(defvar virtualenv-postdeactivate-hook nil)
+;; The installation is fairly easy, you have the load option, put this
+;; in your .emacs:
 
-(defcustom virtualenv-use-ipython t
-  "Use IPython interpreter when available in a virtual environment")
+;; (load-file "/path/to/virtualenv.el")
+;;
+;; Otherwise you can do it with the load path:
 
-(defcustom virtualenv-root-dir (concat (getenv "HOME") "/.virtualenvs")
-  "Default location for user's virtual environments")
+;; (add-to-list 'load-path "Path/to/virtualenv.el/containing/directory/"
+;; (require 'virtualenv)
 
-(defcustom virtualenv-ipython-flags '("-cl")
-  "Extra flags to pass to IPython interpreters")
+;; The usage is very intuitive, to activate a virtualenv use
 
-(defcustom virtualenv-python-flags '("")
-  "Extra flags to pass to Python interpreters")
+;; M-x virtualenv-activate
 
-(defvar virtualenv-active nil
-  "The current active virtual environment or nil")
+;; It will prompt you for the virtual environment path.
+;; If you want to deactivate a virtual environment, use:
 
-(defconst virtualenv-default-interpreter python-python-command)
-(defconst virtualenv-default-interpreter-args python-python-command-args)
+;; M-x virtualenv-deactivate
 
-(defun virtualenv-get-interpreter (virtualenv)
-  (if (and virtualenv-use-ipython
-           (file-exists-p (concat virtualenv "/bin/ipython")))
-      (concat virtualenv "/bin/ipython")
-    (concat virtualenv "/bin/python")))
 
-(defun virtualenv-get-interpreter-args (virtualenv)
-  (if (and virtualenv-use-ipython
-           (file-exists-p (concat virtualenv "/bin/ipython")))
-      virtualenv-ipython-flags
-    virtualenv-python-flags))
+(unless (setq virtualenv-workon-home (getenv "WORKON_HOME"))
+  (setq virtualenv-workon-home "~/.virtualenvs")
+  )
 
-(defun virtualenv-set-interpreter (virtualenv)
-  (if (null virtualenv)
-      (progn 
-        (setq python-python-command virtualenv-default-interpreter)
-        (setq python-python-command-args virtualenv-default-interpreter-args))
-    (let ((interpreter (virtualenv-get-interpreter virtualenv))
-          (interpreter-args (virtualenv-get-interpreter-args virtualenv)))
-      (setq python-python-command interpreter)
-      (setq python-python-command-args interpreter-args))))
+(setq virtualenv-name nil)
 
-(defun virtualenv-activate-environment (virtualenv)
-  (virtualenv-set-interpreter virtualenv)
-  (python-toggle-shells 'cpython)
-  (setq virtualenv-active virtualenv)
-  (run-hook-with-args virtualenv-postactivate-hook virtualenv))
+;;TODO: Move to a generic UTILITY or TOOL package
+(defun virtualenv-filter (predicate sequence)
+  "Apply to each element of SEQUENCE the PREDICATE, if FUNCTION
+  returns non-nil append the element to the return value of
+  virtualenv-filter: a list"
+  (let ((retlist '()))
+    (dolist (element sequence)
+      (when (funcall predicate element)
+        (push element retlist)))
+    (nreverse retlist))
+  )
 
-(defun virtualenv-activate (env)
-  (interactive "sName of environment to activate: ")
-  (virtualenv-activate-environment (concat virtualenv-root-dir env)))
+(defun virtualenv-append-path (dir var)
+  "Append DIR to a path-like varibale VAR, for example:
+ (virtualenv-append-path /usr/bin:/bin /home/test/bin) -> /home/test/bin:/usr/bin:/bin"
+  (concat (expand-file-name dir)
+          path-separator
+          var)
+  )
 
-(defun virtualenv-deactivate-environment ()
-  (let ((virtualenv-current-env virtualenv-active))
-    (setq virtualenv-active nil)
-    (virtualenv-set-interpreter nil)
-    (python-toggle-shells 'cpython)
-    (run-hook-with-args virtualenv-postdeactivate-hook virtualenv-current-env)))
+(defun virtualenv-add-to-path (dir)
+  "Add the specified path element to the Emacs PATH"
+  (setenv "PATH"
+	  (virtualenv-append-path dir
+                                  (getenv "PATH"))))
+
+(defun virtualenv-current ()
+  "barfs the current activated virtualenv"
+  (interactive)
+  (message virtualenv-name)
+  )
+
+(defun virtualenv-activate (dir)
+  "Activate the virtualenv located in DIR"
+  (interactive "DVirtualenv Directory: ")
+
+  ;; Eventually deactivate previous virtualenv
+  (when virtualenv-name
+    (virtualenv-deactivate))
+  
+  ;; Storing old variables
+  (setq virtualenv-old-path (getenv "PATH"))
+  (setq virtualenv-old-exec-path exec-path)
+  
+  (setenv "VIRTUAL_ENV" dir)
+  (virtualenv-add-to-path (concat dir "/bin"))
+  (add-to-list 'exec-path (concat dir "/bin"))
+  
+  (setq virtualenv-name (file-name-nondirectory dir))
+
+  (message (concat "Virtualenv '" virtualenv-name "' activated."))
+  )
 
 (defun virtualenv-deactivate ()
+  "Deactivate the current virtual enviroment"
   (interactive)
-  (virtualenv-deactivate-environment))
+  
+  ;; Restoring old variables
+  (setenv "PATH" virtualenv-old-path)
+  (setq exec-path virtualenv-old-exec-path)
+  
+  (message (concat "Virtualenv '" virtualenv-name "' deactivated."))
+
+  (setq virtualenv-name nil)
+  )
+
+(defun virtualenvp (dir)
+  "Check if a directory is a virtualenv"
+  (file-exists-p (concat dir "/bin/activate"))
+  )
+
+(defun virtualenv-workon-complete ()
+  "return available completions for virtualenv-workon"
+  (let 
+      ;;Varlist				
+      ((filelist (directory-files virtualenv-workon-home t)))
+    ;; Get only the basename from the list of the virtual environments
+    ;; paths
+    (mapcar 'file-name-nondirectory
+            ;; Filter the directories and then the virtual environments
+            (virtualenv-filter 'virtualenvp
+                               (virtualenv-filter 'file-directory-p filelist)))
+    )
+  )
+
+(defun virtualenv-workon (name)
+  "Issue a virtualenvwrapper-like virtualenv-workon command"
+  (interactive (list (completing-read "Virtualenv: " (virtualenv-workon-complete))))
+  (virtualenv-activate (concat (getenv "WORKON_HOME") "/" name))
+  )
 
 (provide 'virtualenv)

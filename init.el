@@ -71,7 +71,7 @@ Examples:
   then feature is loaded from there. Otherwise, quietly indicate
   a failure to load."
   (if (require feature filename 'noerror)
-      (funcall func)
+      (if func (funcall func))
     (message (format "Failed to load: %s" feature))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -146,7 +146,9 @@ Examples:
 (require 'conf-ruby)
 (require 'conf-python)
 ;;(require 'conf-org)
+(require 'conf-ess)
 (require 'conf-auto-mode)
+
 
 (todochiku-message "Emacs"
                    (format ".emacs loaded in %ds"

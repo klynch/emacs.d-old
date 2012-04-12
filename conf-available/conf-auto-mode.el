@@ -9,17 +9,17 @@
 (autoload 'zencoding-mode "zencoding-mode" nil t)
 (add-hook 'sgml-mode-hook 'zencoding-mode)
 
-(autoload 'actr-mode "actr-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.actr$"     . actr-mode))
-(add-to-list 'auto-mode-alist '("\\.act$"      . actr-mode))
+;; (autoload 'actr-mode "actr-mode" nil t)
+;; (add-to-list 'auto-mode-alist '("\\.actr$"     . actr-mode))
+;; (add-to-list 'auto-mode-alist '("\\.act$"      . actr-mode))
 
-(autoload 'stratego-mode "stratego" nil t)
-(add-to-list 'auto-mode-alist '("\\.cltx$"     . stratego-mode))
-(add-to-list 'auto-mode-alist '("\\.cr$"       . stratego-mode))
-(add-to-list 'auto-mode-alist '("\\.r$"        . stratego-mode))
-(add-to-list 'auto-mode-alist '("\\.ss$"       . stratego-mode))
-(add-to-list 'auto-mode-alist '("\\.str$"      . stratego-mode))
-(add-to-list 'auto-mode-alist '("\\.sdf$"      . stratego-mode))
+;; (autoload 'stratego-mode "stratego" nil t)
+;; (add-to-list 'auto-mode-alist '("\\.cltx$"     . stratego-mode))
+;; (add-to-list 'auto-mode-alist '("\\.cr$"       . stratego-mode))
+;; (add-to-list 'auto-mode-alist '("\\.r$"        . stratego-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ss$"       . stratego-mode))
+;; (add-to-list 'auto-mode-alist '("\\.str$"      . stratego-mode))
+;; (add-to-list 'auto-mode-alist '("\\.sdf$"      . stratego-mode))
 
 (add-to-list 'auto-mode-alist '("\\.stk$"      . scheme-mode))
 

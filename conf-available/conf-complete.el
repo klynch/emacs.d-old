@@ -148,7 +148,7 @@ $0"))))
 
 
 ;; Eproject project management with emacs
-(require 'eproject)
+(do-if-require 'eproject nil)
 
 
 (provide 'conf-complete)
