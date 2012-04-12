@@ -11,8 +11,10 @@ eshell
 ido.last
 url
 signatures.txt
-
+eproject.lst
 private.el
+secrets.el
 *.gpg
 loaddefs.el
 templates
+*.pyc
