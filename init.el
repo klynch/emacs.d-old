@@ -149,6 +149,7 @@ Examples:
 (require 'conf-ess)
 (require 'conf-auto-mode)
 (require 'conf-scheme)
+;; (require 'less-mode)
 
 
 (todochiku-message "Emacs"
