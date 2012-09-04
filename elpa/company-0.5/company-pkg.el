@@ -1,1 +1,1 @@
-(define-package "company" "0.5" "extensible inline text completion mechanism")
+(define-package "company" "0.5" "Flexible inline text and code completion")

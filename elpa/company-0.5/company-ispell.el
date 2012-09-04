@@ -1,21 +1,29 @@
-;;; company-ispell.el --- a company-mode completion back-end using ispell
-;;
-;; Copyright (C) 2009 Nikolaj Schumacher
-;;
-;; This file is part of company 0.5.
-;;
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License
-;; as published by the Free Software Foundation; either version 2
-;; of the License, or (at your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful,
+;;; company-ispell.el --- A company-mode completion back-end using ispell
+
+;; Copyright (C) 2009-2011  Free Software Foundation, Inc.
+
+;; Author: Nikolaj Schumacher
+
+;; This file is part of GNU Emacs.
+
+;; GNU Emacs is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;;
+
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+
+
+;;; Commentary:
+;; 
+
+;;; Code:
 
 (require 'company)
 (require 'ispell)
@@ -46,13 +54,13 @@ If nil, use `ispell-complete-word-dict'."
   "A `company-mode' completion back-end using ispell."
   (interactive (list 'interactive))
   (case command
-    ('interactive (company-begin-backend 'company-ispell))
-    ('prefix (when (company-ispell-available)
-               (company-grab-word)))
-    ('candidates (lookup-words arg (or company-ispell-dictionary
-                                       ispell-complete-word-dict)))
-    ('sorted t)
-    ('ignore-case t)))
+    (interactive (company-begin-backend 'company-ispell))
+    (prefix (when (company-ispell-available)
+              (company-grab-word)))
+    (candidates (lookup-words arg (or company-ispell-dictionary
+                                      ispell-complete-word-dict)))
+    (sorted t)
+    (ignore-case t)))
 
 (provide 'company-ispell)
 ;;; company-ispell.el ends here

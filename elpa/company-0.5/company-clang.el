@@ -1,28 +1,36 @@
-;;; company-clang.el --- a company-mode completion back-end for clang
-;;
-;; Copyright (C) 2010 Nikolaj Schumacher
-;;
-;; This file is part of company 0.5.
-;;
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License
-;; as published by the Free Software Foundation; either version 2
-;; of the License, or (at your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful,
+;;; company-clang.el --- A company-mode completion back-end for clang
+
+;; Copyright (C) 2009, 2011  Free Software Foundation, Inc.
+
+;; Author: Nikolaj Schumacher
+
+;; This file is part of GNU Emacs.
+
+;; GNU Emacs is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;;
+
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+
+
+;;; Commentary:
+;; 
+
+;;; Code:
 
 (require 'company)
 (eval-when-compile (require 'cl))
 
 (defcustom company-clang-executable
   (executable-find "clang")
-  "*Location of clang executable"
+  "*Location of clang executable."
   :group 'company-clang
   :type 'file)
 
@@ -203,21 +211,21 @@ Completions only work correctly when the buffer has been saved.
 `company-clang-auto-save' determines whether to do this automatically."
   (interactive (list 'interactive))
   (case command
-        ('interactive (company-begin-backend 'company-clang))
-        ('init (unless company-clang-executable
-                 (error "Company found no clang executable"))
-               (when (version< (company-clang-version)
-                               company-clang-required-version)
-                 (error "Company requires clang version 1.1")))
-        ('prefix (and (memq major-mode company-clang-modes)
-                      buffer-file-name
-                      company-clang-executable
-                      (not (company-in-string-or-comment))
-                      (or (company-grab-symbol) 'stop)))
-        ('candidates (company-clang--candidates arg))
-        ('post-completion (and (derived-mode-p 'objc-mode)
-                               (string-match ":" arg)
-                               (company-clang-objc-templatify arg)))))
+    (interactive (company-begin-backend 'company-clang))
+    (init (unless company-clang-executable
+            (error "Company found no clang executable"))
+          (when (version< (company-clang-version)
+                          company-clang-required-version)
+            (error "Company requires clang version 1.1")))
+    (prefix (and (memq major-mode company-clang-modes)
+                 buffer-file-name
+                 company-clang-executable
+                 (not (company-in-string-or-comment))
+                 (or (company-grab-symbol) 'stop)))
+    (candidates (company-clang--candidates arg))
+    (post-completion (and (derived-mode-p 'objc-mode)
+                          (string-match ":" arg)
+                          (company-clang-objc-templatify arg)))))
 
 (provide 'company-clang)
 ;;; company-clang.el ends here

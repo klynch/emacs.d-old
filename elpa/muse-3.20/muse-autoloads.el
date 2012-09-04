@@ -3,14 +3,14 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "muse" "muse.el" (19697 50524))
+;;;### (autoloads nil "muse" "muse.el" (20549 21060))
 ;;; Generated autoloads from muse.el
  (add-to-list 'auto-mode-alist '("\\.muse\\'" . muse-mode-choose-mode))
 
 ;;;***
 
 ;;;### (autoloads (muse-blosxom-new-entry) "muse-blosxom" "muse-blosxom.el"
-;;;;;;  (19697 50525))
+;;;;;;  (20549 21061))
 ;;; Generated autoloads from muse-blosxom.el
 
 (autoload 'muse-blosxom-new-entry "muse-blosxom" "\
@@ -23,7 +23,7 @@ The page will be initialized with the current date and TITLE.
 ;;;***
 
 ;;;### (autoloads (muse-colors-toggle-inline-images) "muse-colors"
-;;;;;;  "muse-colors.el" (19697 50525))
+;;;;;;  "muse-colors.el" (20549 21061))
 ;;; Generated autoloads from muse-colors.el
 
 (autoload 'muse-colors-toggle-inline-images "muse-colors" "\
@@ -34,7 +34,7 @@ Toggle display of inlined images on/off.
 ;;;***
 
 ;;;### (autoloads (muse-import-docbook-files muse-import-docbook)
-;;;;;;  "muse-import-docbook" "muse-import-docbook.el" (19697 50525))
+;;;;;;  "muse-import-docbook" "muse-import-docbook.el" (20549 21061))
 ;;; Generated autoloads from muse-import-docbook.el
 
 (autoload 'muse-import-docbook "muse-import-docbook" "\
@@ -50,11 +50,11 @@ Convert the Docbook file SRC to Muse, writing output to the DEST file.
 ;;;***
 
 ;;;### (autoloads (muse-import-latex) "muse-import-latex" "muse-import-latex.el"
-;;;;;;  (19697 50525))
+;;;;;;  (20549 21060))
 ;;; Generated autoloads from muse-import-latex.el
 
 (autoload 'muse-import-latex "muse-import-latex" "\
-Not documented
+
 
 \(fn)" t nil)
 
@@ -67,7 +67,7 @@ Not documented
 ;;;;;;  muse-browse-result muse-edit-link-at-point muse-insert-relative-link-to-file
 ;;;;;;  muse-decrease-list-item-indentation muse-increase-list-item-indentation
 ;;;;;;  muse-insert-list-item muse-mode-choose-mode muse-mode) "muse-mode"
-;;;;;;  "muse-mode.el" (19697 50525))
+;;;;;;  "muse-mode.el" (20549 21061))
 ;;; Generated autoloads from muse-mode.el
 
 (autoload 'muse-mode "muse-mode" "\
@@ -197,7 +197,7 @@ with modes that set `left-margin', such as
 
 ;;;### (autoloads (muse-project-publish muse-project-publish-this-file
 ;;;;;;  muse-project-find-file) "muse-project" "muse-project.el"
-;;;;;;  (19697 50525))
+;;;;;;  (20549 21061))
 ;;; Generated autoloads from muse-project.el
 
 (autoload 'muse-project-find-file "muse-project" "\
@@ -228,7 +228,7 @@ Publish the pages of PROJECT that need publishing.
 ;;;***
 
 ;;;### (autoloads (muse-browse-url) "muse-protocols" "muse-protocols.el"
-;;;;;;  (19697 50525))
+;;;;;;  (20549 21061))
 ;;; Generated autoloads from muse-protocols.el
 
 (autoload 'muse-browse-url "muse-protocols" "\
@@ -240,7 +240,7 @@ If OTHER-WINDOW is non-nil, open in a different window.
 ;;;***
 
 ;;;### (autoloads (muse-publish-this-file muse-publish-file muse-publish-region)
-;;;;;;  "muse-publish" "muse-publish.el" (19697 50524))
+;;;;;;  "muse-publish" "muse-publish.el" (20549 21061))
 ;;; Generated autoloads from muse-publish.el
 
 (autoload 'muse-publish-region "muse-publish" "\
@@ -272,7 +272,7 @@ supplied.
 ;;;;;;  "muse-import-xml.el" "muse-ipc.el" "muse-journal.el" "muse-latex.el"
 ;;;;;;  "muse-latex2png.el" "muse-pkg.el" "muse-poem.el" "muse-regexps.el"
 ;;;;;;  "muse-texinfo.el" "muse-wiki.el" "muse-xml-common.el" "muse-xml.el")
-;;;;;;  (19697 50525 887409))
+;;;;;;  (20549 21061 370038))
 
 ;;;***
 

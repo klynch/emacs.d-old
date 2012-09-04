@@ -1,21 +1,29 @@
-;;; company-keywords.el --- a company back-end for programming language keywords
-;;
-;; Copyright (C) 2009 Nikolaj Schumacher
-;;
-;; This file is part of company 0.5.
-;;
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License
-;; as published by the Free Software Foundation; either version 2
-;; of the License, or (at your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful,
+;;; company-keywords.el --- A company back-end for programming language keywords
+
+;; Copyright (C) 2009-2011  Free Software Foundation, Inc.
+
+;; Author: Nikolaj Schumacher
+
+;; This file is part of GNU Emacs.
+
+;; GNU Emacs is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;;
+
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+
+
+;;; Commentary:
+;; 
+
+;;; Code:
 
 (require 'company)
 (eval-when-compile (require 'cl))
@@ -211,17 +219,17 @@
   "A `company-mode' back-end for programming language keywords."
   (interactive (list 'interactive))
   (case command
-    ('interactive (company-begin-backend 'company-))
-    ('prefix (and (assq major-mode company-keywords-alist)
-                  (not (company-in-string-or-comment))
-                  (or (company-grab-symbol) 'stop)))
-    ('candidates
+    (interactive (company-begin-backend 'company-))
+    (prefix (and (assq major-mode company-keywords-alist)
+                 (not (company-in-string-or-comment))
+                 (or (company-grab-symbol) 'stop)))
+    (candidates
      (let ((completion-ignore-case nil)
            (symbols (cdr (assq major-mode company-keywords-alist))))
        (all-completions arg (if (consp symbols)
                                 symbols
                               (cdr (assq symbols company-keywords-alist))))))
-    ('sorted t)))
+    (sorted t)))
 
 (provide 'company-keywords)
 ;;; company-keywords.el ends here

@@ -1,28 +1,36 @@
-;;; company-elisp.el --- a company-mode completion back-end for emacs-lisp-mode
-;;
-;; Copyright (C) 2009 Nikolaj Schumacher
-;;
-;; This file is part of company 0.5.
-;;
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License
-;; as published by the Free Software Foundation; either version 2
-;; of the License, or (at your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful,
+;;; company-elisp.el --- A company-mode completion back-end for emacs-lisp-mode
+
+;; Copyright (C) 2009, 2011  Free Software Foundation, Inc.
+
+;; Author: Nikolaj Schumacher
+
+;; This file is part of GNU Emacs.
+
+;; GNU Emacs is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;;
+
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+
+
+;;; Commentary:
+;; 
+
+;;; Code:
 
 (require 'company)
 (eval-when-compile (require 'cl))
 (require 'help-mode)
 
 (defcustom company-elisp-detect-function-context t
-  "*If enabled, offer lisp functions only in appropriate contexts.
+  "*If enabled, offer Lisp functions only in appropriate contexts.
 Functions are offered for completion only after ' and \(."
   :group 'company
   :type '(choice (const :tag "Off" nil)
@@ -109,20 +117,20 @@ Functions are offered for completion only after ' and \(."
   "A `company-mode' completion back-end for `emacs-lisp-mode'."
   (interactive (list 'interactive))
   (case command
-    ('interactive (company-begin-backend 'company-elisp))
-    ('prefix (and (eq (derived-mode-p 'emacs-lisp-mode) 'emacs-lisp-mode)
-                  (company-grab-lisp-symbol)))
-    ('candidates (company-elisp-candidates arg))
-    ('meta (company-elisp-doc arg))
-    ('doc-buffer (let ((symbol (intern arg)))
-                   (save-window-excursion
-                     (when (or (ignore-errors (describe-function symbol))
-                               (ignore-errors (describe-variable symbol)))
-                       (help-buffer)))))
-    ('location (let ((sym (intern arg)))
-                 (or (ignore-errors (find-definition-noselect sym nil))
-                     (ignore-errors (find-definition-noselect sym 'defvar))
-                     (ignore-errors (find-definition-noselect sym t)))))))
+    (interactive (company-begin-backend 'company-elisp))
+    (prefix (and (eq (derived-mode-p 'emacs-lisp-mode) 'emacs-lisp-mode)
+                 (company-grab-lisp-symbol)))
+    (candidates (company-elisp-candidates arg))
+    (meta (company-elisp-doc arg))
+    (doc-buffer (let ((symbol (intern arg)))
+                  (save-window-excursion
+                    (when (or (ignore-errors (describe-function symbol))
+                              (ignore-errors (describe-variable symbol)))
+                      (help-buffer)))))
+    (location (let ((sym (intern arg)))
+                (or (ignore-errors (find-definition-noselect sym nil))
+                    (ignore-errors (find-definition-noselect sym 'defvar))
+                    (ignore-errors (find-definition-noselect sym t)))))))
 
 (provide 'company-elisp)
 ;;; company-elisp.el ends here

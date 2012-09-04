@@ -4494,7 +4494,7 @@ Index
 * muse-define-style:                     Style Elements.       (line 11)
 * muse-derive-style:                     Deriving Styles.      (line 11)
 * muse-list-edit-minor-mode:             Muse List Edit Minor Mode.
-                                                               (line  6)
+                                                               (line 44)
 * muse-project-alist, reference:         Options for Projects. (line  6)
 * muse-xml-encoding-map:                 XML.                  (line 22)
 * paragraphs:                            Paragraphs.           (line  6)
@@ -4544,7 +4544,7 @@ Index
 * publishing styles, RSS 2.0:            Journal.              (line 91)
 * publishing styles, slides:             LaTeX.                (line 37)
 * publishing styles, slides-pdf:         LaTeX.                (line 52)
-* publishing styles, texi:               Texinfo.              (line 11)
+* publishing styles, texi:               Texinfo.              (line 14)
 * publishing styles, xml:                XML.                  (line 15)
 * publishing, including markup in headers and footers: Tag Summary.
                                                                (line  6)
