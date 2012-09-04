@@ -106,18 +106,27 @@ Examples:
 (add-to-list 'image-load-path (path "images"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Load Packages
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Load up ELPA, the package manager
+(if (fboundp 'package-initialize)
+    (package-initialize)
+  (require 'conf-elpa))
+
+;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Set Color Theme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'color-theme)
 (color-theme-tty-dark)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Load Packages
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Load up ELPA, the package manager
-(require 'conf-elpa)
 
 ;; Use our own CEDET
 ;;(add-to-list 'load-path (path "cedet" "common"))
@@ -146,7 +155,6 @@ Examples:
 (require 'conf-ruby)
 (require 'conf-python)
 ;;(require 'conf-org)
-(require 'conf-ess)
 (require 'conf-auto-mode)
 (require 'conf-scheme)
 ;; (require 'less-mode)

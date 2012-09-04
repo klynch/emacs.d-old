@@ -1252,7 +1252,7 @@
 	[(20120118 1537)
 	 nil "running leiningen commands from emacs [source: github]" single])
  (ein .
-      [(20120902 659)
+      [(20120904 245)
        ((websocket
 	 (0 9)))
        "Emacs IPython Notebook [source: github]" tar])
