@@ -35,6 +35,9 @@
 (define-key k-minor-mode-map [C-end] 'end-of-buffer)
 (define-key k-minor-mode-map [C-home] 'beginning-of-buffer)
 
+;;TODO: turn this into a do-if-require block
+(require 'pager)
+
 ;; Pager stuff
 (define-key k-minor-mode-map [M-up]          'pager-row-up)
 (define-key k-minor-mode-map [M-down]        'pager-row-down)
