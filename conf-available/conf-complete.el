@@ -1,5 +1,7 @@
 (eval-when-compile (require 'cl))
 
+;; TODO get TAB to properly indent
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; YaSnippet
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,11 +10,6 @@
   (defvar snippets-dir (path "snippets")
     "The directory where all of our snippets are stored")
 
-  ;; (setq yas/snippet-dirs (list (path snippets-dir "master")
-  ;;                              (path snippets-dir "licenses")))
-
-  (setq yas/snippet-dirs (path snippets-dir "master"))
-
   (setq yas/prompt-functions '(yas/dropdown-prompt
                                yas/x-prompt
                                yas/ido-prompt
@@ -20,8 +17,8 @@
 
   ;; (setq yas/wrap-around-region 'cua)
 
-  (yas/load-directory yas/snippet-dirs)
-  (yas/initialize)
+  ;; (yas/load-directory yas/snippet-dirs)
+  (yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
 
   (add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
   (add-to-list 'auto-mode-alist '(".yas-setup$"   . emacs-lisp-mode))
