@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Header
+# key: hdr
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 't))
+# contributor: Kevin Lynch <klynch@gmail.com>
+# --
+#!/usr/bin/env ${1:bash}
+# Filename: ${2:`(buffer-name)`}
+# Version: ${3:1.0}
+# Date: ${4:`(current-time-string)`}
+# Author: ${5:`(user-full-name)`} ${6:<`user-mail-address`>}
+# License: ${7:GPL}
+#
+# Usage: $2
+#
+# Description: $0
