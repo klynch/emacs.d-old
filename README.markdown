@@ -170,3 +170,54 @@ The latest version of this is available from [Github][gitlink].
 [ELPA]: http://tromey.com/elpa/
 [ELPA-upload]: http://tromey.com/elpa/upload.html
 [gitlink]: http://github.com/klynch/emacs.d/
+
+
+## TODO
+
+
+TODO Edit Readme
+TODO Edit Latex Snippets
+TODO Create new yas/new-snippet function
+TODO wordpress snippets
+TODO cleanup django snippets
+
+
+### snippets: emacs-lisp-mode
+
+defun: come up for a way to neatly provide argslist, with &optional and &rest
+let: come up with way to provide a new (sym val) for each sym
+
+defcustom: Add [keyword value]
+  :type :options :initialize :set :get :require :risky :safe :group :link
+  :version :package-version :tag :load :set-after
+
+
+### autocomplete-like tooltip help
+
+bind C-? to display a tooltip for the current function or variable, just like
+ac-help
+
+function-called-at-point
+
+
+(defun v () (interactive)
+  (let ((fn (variable-at-point)))
+	(message fn)))
+
+variable-at-point
+function-called-at-point
+face-at-point (?)
+
+(defun tip ()
+	""
+  (interactive)
+  function-called-at-point
+  )
+
+(global-set-key global-
+
+
+(defun ac-help (&optional persist)
+  (interactive "P")
+  (when ac-menu
+    (popup-menu-show-help ac-menu persist)))
