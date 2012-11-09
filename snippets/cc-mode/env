@@ -1,6 +1,0 @@
-#name: int main(argc, argv, argp) { ... }
-# --
-int main(int argc, char *argv[], char *argp[]) {
-    $0
-    return 0;
-}
