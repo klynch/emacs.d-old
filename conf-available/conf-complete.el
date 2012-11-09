@@ -67,7 +67,7 @@ $0"))))
   (setq ac-dwim t)
   (ac-config-default)
 
-  (ac-set-trigger-key "TAB")
+  (ac-set-trigger-key "<tab>")
   (setq ac-auto-start nil)
 
 
