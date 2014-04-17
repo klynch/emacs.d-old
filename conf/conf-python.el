@@ -68,14 +68,14 @@
             ))
 
 
-(defun python-auto-fill-comments-only ()
-  "Autofill inside of comments"
-  (auto-fill-mode 1)
-  (set (make-local-variable 'fill-nobreak-predicate)
-       (lambda ()
-         (not (python-in-string/comment)))))
+;; (defun python-auto-fill-comments-only ()
+;;   "Autofill inside of comments"
+;;   (auto-fill-mode 1)
+;;   (set (make-local-variable 'fill-nobreak-predicate)
+;;        (lambda ()
+;;          (not (python-in-string/comment)))))
 
-(add-hook 'python-mode-hook 'python-auto-fill-comments-only)
+;; (add-hook 'python-mode-hook 'python-auto-fill-comments-only)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

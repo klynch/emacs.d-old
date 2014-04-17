@@ -12,8 +12,8 @@
 (eval-when-compile (require 'cl))
 
 (dolist (r `((?i (file . (path "init.el")))
-             (?b (file . (path conf-available "conf-bindings.el")))
-             (?r (file . (path conf-available "conf-registers.el")))))
+             (?b (file . (path conf-dir "conf-bindings.el")))
+             (?r (file . (path conf-dir "conf-registers.el")))))
   (set-register (car r) (cadr r)))
 
 (provide 'conf-registers)

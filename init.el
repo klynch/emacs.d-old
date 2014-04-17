@@ -53,19 +53,6 @@ Examples:
       (update-directory-autoloads dir)))
   (load generated-autoload-file 'noerror))
 
-(defun load-conf-file (file)
-  "Loads the config file located in conf-enabled directory"
-  (require (intern (file-name-sans-extension file))
-           (path conf-enabled file)))
-
-(defun load-conf-enabled ()
-  "Loads all of the configuration files linked in
-~/.emacs.d/conf-enabled from ~/.emacs.d/conf-available"
-  (make-directory conf-enabled t)
-  (make-directory conf-available t)
-  (mapcar 'load-conf-file
-          (delete ".." (delete "." (directory-files conf-enabled)))))
-
 (defun do-if-require (feature func &optional filename)
   "Calls `func' when feature is loaded. If filename is provided,
   then feature is loaded from there. Otherwise, quietly indicate
@@ -81,14 +68,10 @@ Examples:
 ;; ~/.emacs.d/ should be added
 (add-to-list 'load-path (path))
 
-(defvar conf-available (path "conf-available")
+(defvar conf-dir (path "conf")
   "Contains all custom emacs configuration files available.")
 
-(defvar conf-enabled (path "conf-enabled")
-  "Contains all emacs config files from `conf-enabled' that are
-  to be loaded at startup.")
-
-(add-to-list 'load-path conf-available)
+(add-to-list 'load-path conf-dir)
 
 ;; We don't want the custom file cluttering our beautiful .emacs file
 (setq custom-file (path "custom.el"))
