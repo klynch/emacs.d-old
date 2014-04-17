@@ -144,13 +144,13 @@ Examples:
 (require 'conf-web)
 
 
-(todochiku-message "Emacs"
-                   (format ".emacs loaded in %ds"
-                           (destructuring-bind (hi lo ms) (current-time)
-                             (- (+ hi lo)
-                                (+ (first *emacs-load-start*)
-                                   (second *emacs-load-start*)))))
-                   (todochiku-icon 'check))
+;; (todochiku-message "Emacs"
+;;                    (format ".emacs loaded in %ds"
+;;                            (destructuring-bind (hi lo ms) (current-time)
+;;                              (- (+ hi lo)
+;;                                 (+ (first *emacs-load-start*)
+;;                                    (second *emacs-load-start*)))))
+;;                    (todochiku-icon 'check))
 
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
